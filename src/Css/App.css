@@ -3,11 +3,11 @@
 }
 
 a {
-  -webkit-tap-highlight-color: rgba(0,0,0,0); /* Отключает синий фон при нажатии */
+  -webkit-tap-highlight-color: rgba(0,0,0,0); 
 }
 
 Link{
-  -webkit-tap-highlight-color: rgba(0,0,0,0); /* Отключает синий фон при нажатии */
+  -webkit-tap-highlight-color: rgba(0,0,0,0); 
 }
 
 ::-webkit-scrollbar {

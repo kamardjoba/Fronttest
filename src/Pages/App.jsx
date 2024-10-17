@@ -100,15 +100,6 @@ function App() {
   preloadImage(ksm);
   }, []);
 
-  useEffect(() => {
-    
-    import('./Home.jsx');
-    import('./Leaderboard.jsx');
-    import('./P2e.jsx');
-    import('./Friends.jsx');
-    import('./NFTs.jsx');
-  }, []);
-
   if (!localStorage.getItem('Galka')) {localStorage.setItem('Galka', 'false');}
   const Galo4ka = localStorage.getItem('Galka') === 'true';
   if (!localStorage.getItem('Knopka')) {localStorage.setItem('Knopka', 'true');}
@@ -307,8 +298,6 @@ useEffect(() => {
           setAdsWatched(data.adsWatched);
           setcoinsAdd(data.coinsAdd);
           console.log("Adswatched", AdsWatched)
-
-
 
         const accountCreationDate = new Date(data.accountCreationDate);
         const currentYear = new Date().getFullYear();
