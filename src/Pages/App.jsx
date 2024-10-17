@@ -50,19 +50,17 @@ const REACT_APP_BACKEND_URL = 'https://testforeveryoneback-production.up.railway
 
 function App() {
 
-  const [userId, setUserId] = useState(null); // Используем useState для хранения userId
+  const [userId, setUserId] = useState(null); 
 
   useEffect(() => {
-    // Проверяем, если Telegram Web App доступен
     if (window.Telegram.WebApp) {
       const tg = window.Telegram.WebApp;
       tg.ready();
 
-      // Извлекаем user_id из initDataUnsafe
       const userIdFromTG = tg.initDataUnsafe?.user?.id;
 
       if (userIdFromTG) {
-        setUserId(userIdFromTG);  // Устанавливаем userId в state
+        setUserId(userIdFromTG);  
         localStorage.setItem('userId', userIdFromTG);
         console.log("User ID from Telegram WebApp: ", userIdFromTG);
       } else {
@@ -72,10 +70,9 @@ function App() {
       console.error('Telegram Web App недоступен');
     }
 
-    // Если не было получено userId из Telegram WebApp, проверим localStorage
     const savedUserId = localStorage.getItem('userId');
     if (savedUserId && !userId) {
-      setUserId(savedUserId); // Если userId сохранен в localStorage, устанавливаем его в state
+      setUserId(savedUserId); 
     }
   }, [userId]);
 
@@ -143,7 +140,6 @@ function App() {
 
   const [alert, setalert] = useState(false);
 
-  //const tonConnectUI = useTonConnectUI();
   const locationOcties = useLocation();
   const navigateOcties = useNavigate();
 
@@ -291,7 +287,6 @@ useEffect(() => {
 //     }
 // }, []);
 
-
   const fetchUserData = useCallback(async (userId) => {
     if (!userId) {
       console.error('userId не передан');
@@ -399,19 +394,18 @@ useEffect(() => {
   
     if (userIdFromURL) {
       userId = userIdFromURL;
-      localStorage.setItem('userId', userId); // Сохраняем userId для последующего использования
+      localStorage.setItem('userId', userId); 
     } else if (savedUserId) {
-      userId = savedUserId; // Берем userId из localStorage, если он был сохранен
+      userId = savedUserId; 
     } else {
       console.error('userId не найден');
-      return; // Останавливаем выполнение, если userId не найден ни в URL, ни в localStorage
+      return; 
     }
   
-    fetchUserData(userId); // Вызываем функцию с userId
+    fetchUserData(userId); 
   }, [fetchUserData]);
   
 
-  
 // const handleCheckReferrals = () => {
 //     axios.post(`${REACT_APP_BACKEND_URL}/get-referral-count`, { userId })
 //       .then(response => {
@@ -492,7 +486,6 @@ const handleCheckReferrals = () => {
     }
   };
 
-
   useEffect(() => {
     const userId = new URLSearchParams(window.location.search).get('userId');
     if (userId) {
@@ -553,24 +546,7 @@ const handleCheckReferrals = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   
-  // useEffect(() => {
-  //   const userIdFromURL = new URLSearchParams(window.location.search).get('userId');
-  //   const savedUserId = localStorage.getItem('userId');
-  
-  //   let userId;
-  
-  //   if (userIdFromURL) {
-  //     userId = userIdFromURL;
-  //     localStorage.setItem('userId', userId); // Сохраняем userId для последующего использования
-  //   } else if (savedUserId) {
-  //     userId = savedUserId; // Берем userId из localStorage, если он был сохранен
-  //   } else {
-  //     console.error('userId не найден');
-  //     return; // Останавливаем выполнение, если userId не найден ни в URL, ни в localStorage
-  //   }
- 
-  //   fetchUserData(userId); // Вызываем функцию с userId
-  // }, [fetchUserData]);
+
 
   // const isMobileDevice = () => {
   //   return /Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent);

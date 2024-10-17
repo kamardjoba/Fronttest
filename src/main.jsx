@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './Pages/App.jsx'; // Импортируем ваш компонент App
+import App from './Pages/App.jsx'; 
 import { TonConnectUIProvider } from '@tonconnect/ui-react';
 import { BrowserRouter } from "react-router-dom";
 

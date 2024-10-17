@@ -60,7 +60,6 @@ const NFTs = ({showNotCompleted, Nft, handleCheckReferrals, buttonVisible, Check
       
       await tonConnectUI.sendTransaction(transaction);
       
-      // Log userId to ensure it's correct
       console.log("User ID:", userId);
       
       const response = await axios.post(`${REACT_APP_BACKEND_URL}/record-transaction`, { userId });
