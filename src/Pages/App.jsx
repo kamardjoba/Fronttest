@@ -47,6 +47,7 @@ import { P2e_Soon, P2e_OctiesCosmo,
 
 const REACT_APP_BACKEND_URL = 'https://testforeveryoneback-production.up.railway.app';
 
+
 function App() {
 
   const [userId, setUserId] = useState(null); // Используем useState для хранения userId
@@ -571,20 +572,21 @@ const handleCheckReferrals = () => {
   //   fetchUserData(userId); // Вызываем функцию с userId
   // }, [fetchUserData]);
 
-  const isMobileDevice = () => {
-    return /Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent);
-  };
+  // const isMobileDevice = () => {
+  //   return /Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent);
+  // };
 
   return (
     <TonConnectUIProvider manifestUrl="https://resilient-madeleine-9ff7c2.netlify.app/tonconnect-manifest.json">
     <div className="App">
 
-      {!isMobileDevice() && <Qr/>}
+      {/* {!isMobileDevice() && <Qr/>} */}
       {isLoadingOctoVs && <LoadingScreen isLoadingOcto={isLoadingOcto} />}
       {isMint && isLoadingOctoVs && <LoadingScreenOctoNft isLoadingOcto={isLoadingOcto} />}
       {!isMint && isLoadingOctoVs && <LoadingScreenOcto isLoadingOcto={isLoadingOcto} />}
 
-      {isMobileDevice() && ( <Routes>
+      {/* {isMobileDevice() && (  */}
+      <Routes>
         <Route path="/" element={ <Home Galo4ka={Galo4ka} Knopka={Knopka} Galo4kaX={Galo4kaX} KnopkaX={KnopkaX}  GalkaAnyTap={GalkaAnyTap} KnopkaAnyTap={KnopkaAnyTap}
                                   KnopkaNick={KnopkaNick} Ton5Succes={Ton5Succes} AdsWatched={AdsWatched}  coinsAdd={coinsAdd} hasTelegramPremium={hasTelegramPremium} accountAgeCoins={accountAgeCoins} 
                                   transactionNumber={transactionNumber} coins={coins} setYearsOpen={setYearsOpen} isMint={isMint} 
@@ -602,7 +604,7 @@ const handleCheckReferrals = () => {
                               Checknft={Checknft} shapka2={shapka2} dedpool={dedpool} ChecknftDone={ChecknftDone} setTransactionNumber={setTransactionNumber} userId={userId}
                               rosomaha={rosomaha} ton5={ton5} ton55={ton55} durov={durov} isMint={isMint} isMintv2={isMintv2} alert={alert} setalert={setalert} updatedSpots={updatedSpots}
                               missed={missed} complated={complated}/>}/>
-      </Routes> )}      
+      </Routes>  
 
       {FPage && (<First onClose={handleFirstPageClose} setCheckOpen={setCheckOpen} />)}
       {CheckOpen && (<Check setCheckOpen={setCheckOpen} setYearsOpen={setYearsOpen} />)}
@@ -610,7 +612,8 @@ const handleCheckReferrals = () => {
       {OctOpen && (<Oct onClose={setOctOpen} setYearsOpen={setYearsOpen} coinOnlyYears={coinOnlyYears} />)}
       
 
-      {isMobileDevice() && (<footer className='BTNLow'>
+      {/* {isMobileDevice() &&  */}
+      <footer className='BTNLow'>
         <ul className='footerItems'>
             <li className='footerItem'>
               <Link className={`footerItemImgWrapper ${(locationOcties.pathname !== "/") ? 'img-dark' : ''}`}  to="/" onClick={(event) => {window.Telegram.WebApp.HapticFeedback.impactOccurred('heavy')}} >
@@ -643,7 +646,7 @@ const handleCheckReferrals = () => {
               <p className= {`footerItemLabel ${locationOcties.pathname !== "/nfts" ? 'img-dark' : ''}`}>NFTs</p>
             </li>
           </ul>
-      </footer>)}
+      </footer>
     </div>
      </TonConnectUIProvider>
   );

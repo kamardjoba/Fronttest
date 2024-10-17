@@ -5,7 +5,7 @@ import TonRef1 from '../IMG/Nft_ref/1tonRef.png';
 
 
 const AvalibleNFT = ( {buttonVisible, showNotCompleted, ChecknftDone, sendTransactionFunc, Checknft, sendTransaction1,
-    handleCheckReferrals, timerforsent, updatedSpots, Tg_Form_Window, durov, ton55, isMintv2, isMintv3
+    handleCheckReferrals, timerforsent, updatedSpots, Tg_Form_Window, durov, ton55, isMintv2, isMintv3,sendTransaction1Ton
  }) => {
 
 
@@ -40,7 +40,7 @@ const AvalibleNFT = ( {buttonVisible, showNotCompleted, ChecknftDone, sendTransa
 
               <p id='or'>OR</p>
               <button className='Referal5Ton'>
-                <img src={TonRef1} alt=''/>
+                <img src={TonRef1} onClick={sendTransaction1Ton} alt=''/>
               </button>
 
           </div>

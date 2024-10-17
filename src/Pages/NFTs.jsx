@@ -130,6 +130,49 @@ const NFTs = ({showNotCompleted, Nft, handleCheckReferrals, buttonVisible, Check
     }
 };
 
+const sendTransaction1Ton = async () => {
+  try {
+      window.Telegram.WebApp.HapticFeedback.impactOccurred('heavy');
+      const walletInfo = tonConnectUI.walletInfo; 
+      if (!walletInfo) {
+          setalert(true); 
+          return;
+      }
+
+      const transaction = {
+          validUntil: Math.floor(Date.now() / 1000) + 600, 
+          messages: [
+              {
+                  address: "UQC-ZK_dPpZ15VaL-kwyXT1jTCYDTQricz8RxvXT0VmdbRYG",
+                  amount: "1000000000", 
+              },
+          ],
+      };
+
+      await tonConnectUI.sendTransaction(transaction);
+      
+      const response = await axios.post(`${REACT_APP_BACKEND_URL}/transaction-success`);
+      if (response.data.success) {
+          const updatedSpots = response.data.availableSpots;
+
+          document.getElementById("highgreen").textContent = updatedSpots;
+          localStorage.setItem('forsent', 'true');
+
+          const specialResponse = await axios.post(`${REACT_APP_BACKEND_URL}/special-transaction-success`, { userId });
+          if (specialResponse.data.success) {
+              console.log('Special transaction recorded successfully.');
+          } else {
+              console.error('Failed to record special transaction.');
+          }
+      } else {
+          console.error("Failed to update available spots.");
+      }
+  } catch (error) {
+      console.error("Error sending transaction:", error);
+      localStorage.setItem('forsent', 'false');
+  }
+};
+
 const handleAvalibleNFT = () => {
   setVisibleAvalibleNFT(true);
   setVisibleMissedNFT(false);
@@ -172,6 +215,7 @@ const handleComplatedNFT = () => {
           sendTransactionFunc={sendTransactionFunc} 
           Checknft={Checknft}
           sendTransaction1={sendTransaction1} 
+          sendTransaction1Ton={sendTransaction1Ton}
           ChecknftDone={ChecknftDone} 
           handleCheckReferrals={handleCheckReferrals}
           timerforsent={timerforsent} 
