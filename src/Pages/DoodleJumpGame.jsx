@@ -5,6 +5,8 @@ import platformSrc from '../IMG/Doodle_jump/platform.png';
 import backgroundSrc from '../IMG/Doodle_jump/doodlejumpbg.png';
 import '../Css/doodlejump.css';
 
+
+
 const DoodleJumpGame = () => {
   const canvasRef = useRef(null);
 
@@ -46,6 +48,7 @@ const DoodleJumpGame = () => {
     let score = 0;
     let maxScore = 0;
     let gameOver = false;
+    let touchStarted = false;
 
     // Загрузка изображений
     doodlerRightImg.src = doodlerRightSrc;
@@ -65,13 +68,10 @@ const DoodleJumpGame = () => {
     velocityY = initialVelocityY;
     placePlatforms();
     requestAnimationFrame(update);
-    document.addEventListener('keydown', moveDoodler);
-    document.addEventListener('keyup', moveDoodler);
 
     // Добавляем обработчики сенсорных событий
-    canvasRef.current.addEventListener('touchstart', handleTouchStart, { passive: false });
-    canvasRef.current.addEventListener('touchmove', handleTouchMove, { passive: false });
-    canvasRef.current.addEventListener('touchend', handleTouchEnd, { passive: false });
+    document.addEventListener('touchstart', handleTouchStart);
+    document.addEventListener('touchend', handleTouchEnd);
 
     // Обработка изменения размера окна
     const resizeCanvas = () => {
@@ -89,50 +89,12 @@ const DoodleJumpGame = () => {
 
     window.addEventListener('resize', resizeCanvas);
 
-    // Переменные для сенсорных событий
-    let touchX = null;
-    let touchY = null;
-
-    // Функции обработчиков сенсорных событий
-    function handleTouchStart(e) {
-      e.preventDefault();
-      const touch = e.touches[0];
-      touchX = touch.clientX;
-      touchY = touch.clientY;
-    }
-
-    function handleTouchMove(e) {
-      e.preventDefault();
-      const touch = e.touches[0];
-      const deltaX = touch.clientX - touchX;
-
-      if (deltaX > 10) {
-        // Свайп вправо
-        velocityX = 6;
-        doodler.img = doodlerRightImg;
-      } else if (deltaX < -10) {
-        // Свайп влево
-        velocityX = -6;
-        doodler.img = doodlerLeftImg;
-      }
-
-      touchX = touch.clientX;
-    }
-
-    function handleTouchEnd(e) {
-      e.preventDefault();
-      // Останавливаем движение при окончании касания
-      velocityX = 0;
-    }
-
     // Очищаем обработчики при размонтировании
     return () => {
       window.removeEventListener('resize', resizeCanvas);
-      document.removeEventListener('keydown', moveDoodler);
-      document.removeEventListener('keyup', moveDoodler);
-      canvasRef.current.removeEventListener('touchstart', handleTouchStart);
-      canvasRef.current.removeEventListener('touchmove', handleTouchMove);
-      canvasRef.current.removeEventListener('touchend', handleTouchEnd);
+      // document.removeEventListener('keydown', moveDoodler);
+      document.removeEventListener('touchstart', handleTouchStart);
+      document.removeEventListener('touchend', handleTouchEnd);
     };
 
     // Функция обновления игры
@@ -198,7 +160,7 @@ const DoodleJumpGame = () => {
 
       if (gameOver) {
         context.fillText(
-          "Game Over: Press 'Space' to Restart",
+          "Game Over: Tap to Restart",
           boardWidth / 7,
           boardHeight * 0.875
         );
@@ -207,31 +169,38 @@ const DoodleJumpGame = () => {
       }
     }
 
-    // Функция управления дудлером
-    function moveDoodler(e) {
-      if (e.type === 'keydown') {
-        if (e.code === 'ArrowRight' || e.code === 'KeyD') {
-          velocityX = 6;
-          doodler.img = doodlerRightImg;
-        } else if (e.code === 'ArrowLeft' || e.code === 'KeyA') {
-          velocityX = -6;
-          doodler.img = doodlerLeftImg;
-        } else if (e.code === 'Space' && gameOver) {
-          // Сброс игры
-          velocityX = 0;
-          velocityY = initialVelocityY;
-          score = 0;
-          maxScore = 0;
-          gameOver = false;
-          placePlatforms();
-          requestAnimationFrame(update);
-        }
-      } else if (e.type === 'keyup') {
-        // Останавливаем дудлера при отпускании клавиши
-        if (e.code === 'ArrowRight' || e.code === 'KeyD' || e.code === 'ArrowLeft' || e.code === 'KeyA') {
-          velocityX = 0;
-        }
+    // Сенсорные события
+    let touchX = null;
+
+    function handleTouchStart(e) {
+      touchX = e.touches[0].clientX;
+
+      if (gameOver && !touchStarted) {
+        // Сброс игры при касании после окончания
+        velocityX = 0;
+        velocityY = initialVelocityY;
+        score = 0;
+        maxScore = 0;
+        gameOver = false;
+        placePlatforms();
+        requestAnimationFrame(update);
+        touchStarted = true;
+        return;
       }
+
+      if (touchX < boardWidth / 2) {
+        // Касание левой стороны экрана
+        velocityX = -6;
+        doodler.img = doodlerLeftImg;
+      } else {
+        // Касание правой стороны экрана
+        velocityX = 6;
+        doodler.img = doodlerRightImg;
+      }
+    }
+
+    function handleTouchEnd(e) {
+      velocityX = 0;
     }
 
     // Функция размещения платформ
