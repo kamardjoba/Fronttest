@@ -5,7 +5,6 @@ import platformSrc from '../IMG/Doodle_jump/platform.png';
 import backgroundSrc from '../IMG/Doodle_jump/doodlejumpbg.png';
 import '../Css/doodlejump.css';
 
-
 const DoodleJumpGame = () => {
   const canvasRef = useRef(null);
 
@@ -66,8 +65,13 @@ const DoodleJumpGame = () => {
     velocityY = initialVelocityY;
     placePlatforms();
     requestAnimationFrame(update);
-    document.addEventListener('keydown', moveDoodlerKeyDown);
-    document.addEventListener('keyup', moveDoodlerKeyUp);
+    document.addEventListener('keydown', moveDoodler);
+    document.addEventListener('keyup', moveDoodler);
+
+    // Добавляем обработчики сенсорных событий
+    canvasRef.current.addEventListener('touchstart', handleTouchStart, { passive: false });
+    canvasRef.current.addEventListener('touchmove', handleTouchMove, { passive: false });
+    canvasRef.current.addEventListener('touchend', handleTouchEnd, { passive: false });
 
     // Обработка изменения размера окна
     const resizeCanvas = () => {
@@ -85,11 +89,50 @@ const DoodleJumpGame = () => {
 
     window.addEventListener('resize', resizeCanvas);
 
+    // Переменные для сенсорных событий
+    let touchX = null;
+    let touchY = null;
+
+    // Функции обработчиков сенсорных событий
+    function handleTouchStart(e) {
+      e.preventDefault();
+      const touch = e.touches[0];
+      touchX = touch.clientX;
+      touchY = touch.clientY;
+    }
+
+    function handleTouchMove(e) {
+      e.preventDefault();
+      const touch = e.touches[0];
+      const deltaX = touch.clientX - touchX;
+
+      if (deltaX > 10) {
+        // Свайп вправо
+        velocityX = 6;
+        doodler.img = doodlerRightImg;
+      } else if (deltaX < -10) {
+        // Свайп влево
+        velocityX = -6;
+        doodler.img = doodlerLeftImg;
+      }
+
+      touchX = touch.clientX;
+    }
+
+    function handleTouchEnd(e) {
+      e.preventDefault();
+      // Останавливаем движение при окончании касания
+      velocityX = 0;
+    }
+
     // Очищаем обработчики при размонтировании
     return () => {
       window.removeEventListener('resize', resizeCanvas);
-      document.removeEventListener('keydown', moveDoodlerKeyDown);
-      document.removeEventListener('keyup', moveDoodlerKeyUp);
+      document.removeEventListener('keydown', moveDoodler);
+      document.removeEventListener('keyup', moveDoodler);
+      canvasRef.current.removeEventListener('touchstart', handleTouchStart);
+      canvasRef.current.removeEventListener('touchmove', handleTouchMove);
+      canvasRef.current.removeEventListener('touchend', handleTouchEnd);
     };
 
     // Функция обновления игры
@@ -164,58 +207,34 @@ const DoodleJumpGame = () => {
       }
     }
 
-    // Функция управления дудлером с клавиатуры
-    function moveDoodlerKeyDown(e) {
-      if (e.code === 'ArrowRight' || e.code === 'KeyD') {
-        velocityX = 6; // Фиксированная скорость
-        doodler.img = doodlerRightImg;
-      } else if (e.code === 'ArrowLeft' || e.code === 'KeyA') {
-        velocityX = -6;
-        doodler.img = doodlerLeftImg;
-      } else if (e.code === 'Space' && gameOver) {
-        // Сброс игры
-        velocityX = 0;
-        velocityY = initialVelocityY;
-        score = 0;
-        maxScore = 0;
-        gameOver = false;
-        placePlatforms();
-        requestAnimationFrame(update);
+    // Функция управления дудлером
+    function moveDoodler(e) {
+      if (e.type === 'keydown') {
+        if (e.code === 'ArrowRight' || e.code === 'KeyD') {
+          velocityX = 6;
+          doodler.img = doodlerRightImg;
+        } else if (e.code === 'ArrowLeft' || e.code === 'KeyA') {
+          velocityX = -6;
+          doodler.img = doodlerLeftImg;
+        } else if (e.code === 'Space' && gameOver) {
+          // Сброс игры
+          velocityX = 0;
+          velocityY = initialVelocityY;
+          score = 0;
+          maxScore = 0;
+          gameOver = false;
+          placePlatforms();
+          requestAnimationFrame(update);
+        }
+      } else if (e.type === 'keyup') {
+        // Останавливаем дудлера при отпускании клавиши
+        if (e.code === 'ArrowRight' || e.code === 'KeyD' || e.code === 'ArrowLeft' || e.code === 'KeyA') {
+          velocityX = 0;
+        }
       }
     }
 
-    function moveDoodlerKeyUp(e) {
-      if (
-        e.code === 'ArrowRight' ||
-        e.code === 'KeyD' ||
-        e.code === 'ArrowLeft' ||
-        e.code === 'KeyA'
-      ) {
-        velocityX = 0;
-      }
-    }
-
-    // Функции управления для сенсорных событий
-    function moveLeftStart() {
-      velocityX = -6; // Та же скорость, что и при нажатии клавиши
-      doodler.img = doodlerLeftImg;
-    }
-
-    function moveLeftEnd() {
-      velocityX = 0;
-    }
-
-    function moveRightStart() {
-      velocityX = 6;
-      doodler.img = doodlerRightImg;
-    }
-
-    function moveRightEnd() {
-      velocityX = 0;
-    }
-
-    // Остальные функции остаются без изменений (placePlatforms, newPlatform, detectCollision, updateScore)
-
+    // Функция размещения платформ
     function placePlatforms() {
       platformArray = [];
 
@@ -242,6 +261,7 @@ const DoodleJumpGame = () => {
       doodler.y = firstPlatform.y - doodler.height;
     }
 
+    // Функция создания новой платформы
     function newPlatform() {
       let randomX = Math.floor(Math.random() * (boardWidth - platformWidth));
       let platform = {
@@ -255,6 +275,7 @@ const DoodleJumpGame = () => {
       platformArray.push(platform);
     }
 
+    // Функция обнаружения столкновения
     function detectCollision(a, b) {
       return (
         a.x < b.x + b.width &&
@@ -264,6 +285,7 @@ const DoodleJumpGame = () => {
       );
     }
 
+    // Функция обновления счета
     function updateScore() {
       let points = Math.floor(50 * Math.random());
       if (velocityY < 0) {
@@ -277,46 +299,15 @@ const DoodleJumpGame = () => {
     }
   }, []);
 
-  // Возвращаем JSX с кнопками
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-      <canvas
-        id="board"
-        ref={canvasRef}
-        style={{
-          display: 'block',
-          margin: '0 auto',
-        }}
-      ></canvas>
-      {/* Кнопка "Влево" */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: '10%',
-          left: '10%',
-          width: '20%',
-          height: '20%',
-          backgroundColor: 'rgba(0,0,0,0.2)',
-          borderRadius: '50%',
-        }}
-        onTouchStart={moveLeftStart}
-        onTouchEnd={moveLeftEnd}
-      ></div>
-      {/* Кнопка "Вправо" */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: '10%',
-          right: '10%',
-          width: '20%',
-          height: '20%',
-          backgroundColor: 'rgba(0,0,0,0.2)',
-          borderRadius: '50%',
-        }}
-        onTouchStart={moveRightStart}
-        onTouchEnd={moveRightEnd}
-      ></div>
-    </div>
+    <canvas
+      id="board"
+      ref={canvasRef}
+      style={{
+        display: 'block',
+        margin: '0 auto',
+      }}
+    ></canvas>
   );
 };
 
