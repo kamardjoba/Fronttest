@@ -442,7 +442,7 @@ useEffect(() => {
                  </div>}
                 <p>+35 $OCTIES for<span id='highlight'> view </span></p>   
                 </div>
-                <img src={racketaMain} id='telefon' alt=''/>
+                <img src={racketaMain} id='telefon' onClick={TgStory}  alt=''/>
               </div>
           
         </div>
