@@ -294,18 +294,50 @@ const DoodleJumpGame = () => {
         }
       }
     }, []);
+
+    function handleButtonPress(direction) {
+        if (direction === 'left') {
+          velocityX = -6;
+          doodler.img = doodlerLeftImg;
+        } else if (direction === 'right') {
+          velocityX = 6;
+          doodler.img = doodlerRightImg;
+        }
+      }
+      
+      function handleButtonRelease() {
+        velocityX = 0;
+      }
   
     return (
-      <canvas
-        id="board"
-        ref={canvasRef}
-        style={{
-          display: 'block',
-          margin: '0 auto',
-          touchAction: 'none', // Предотвращаем жесты масштабирования и прокрутки
-        }}
-      ></canvas>
-    );
-  };
+        <div style={{ position: 'relative' }}>
+          <canvas
+            id="board"
+            ref={canvasRef}
+            style={{
+              display: 'block',
+              margin: '0 auto',
+              touchAction: 'none',
+            }}
+          ></canvas>
+          <div style={{ position: 'absolute', bottom: 20, width: '100%', textAlign: 'center' }}>
+            <button
+              onTouchStart={() => handleButtonPress('left')}
+              onTouchEnd={handleButtonRelease}
+              style={{ fontSize: 30, marginRight: 50 }}
+            >
+              ⬅️
+            </button>
+            <button
+              onTouchStart={() => handleButtonPress('right')}
+              onTouchEnd={handleButtonRelease}
+              style={{ fontSize: 30 }}
+            >
+              ➡️
+            </button>
+          </div>
+        </div>
+      );
+    };
   
   export default DoodleJumpGame;
