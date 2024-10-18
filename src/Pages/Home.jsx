@@ -8,7 +8,6 @@ import { Reward_Age, Reward_Premium, Reward_Chanel,
          Reward_pass_ticket,  Reward_hz_sho_ce_kakoito_karandash,
          Reward_racketa, Reward_Ads} from "../IMG/Reward_icon";
 
-
 //import image SwapTask
 import AnyTapChanel from '../IMG/All_Logo/AnyTapChanel.png';
 import tgLogo from '../IMG/All_Logo/TgComunity.png';
@@ -54,12 +53,12 @@ function Home({Galo4ka, Knopka, Galo4kaX, KnopkaX,  GalkaAnyTap, KnopkaAnyTap, K
   useEffect(() => {
     if (window.Adsgram) {
         AdControllerRef.current = window.Adsgram.init({
-            blockId: "4141", // замените на ваш реальный blockId
-            debug: false, // отключите в продакшене
-            debugBannerType: "FullscreenMedia" // тип тестового баннера, если debug включен
+            blockId: "4141", 
+            debug: false, 
+            debugBannerType: "FullscreenMedia" 
         });
     }
-}, []); // пустой массив зависимостей для выполнения только один раз
+}, []);
 
 // const showAd = async () => {
 //   try {
@@ -134,7 +133,6 @@ useEffect(() => {
 
 const showAd = async () => {
   try {
-    // Запрашиваем информацию о возможности просмотра рекламы
     const response = await axios.get(`${REACT_APP_BACKEND_URL}/get-ads-watched`, {
       params: { userId },
     });
@@ -161,7 +159,6 @@ const showAd = async () => {
             if (result.done) {
               console.log('Пользователь досмотрел рекламу до конца');
               try {
-                // Добавляем монеты пользователю
                 const addCoinsResponse = await axios.post(
                   `${REACT_APP_BACKEND_URL}/add-coins`,
                   { userId, amount: 35 }
@@ -169,9 +166,8 @@ const showAd = async () => {
                 const coinsData = addCoinsResponse.data;
                 if (coinsData.success) {
                   console.log('35 монет успешно добавлены пользователю');
-                  setCoins(coinsData.coins); // Обновляем состояние монет
+                  setCoins(coinsData.coins); 
 
-                  // Обновляем количество просмотров рекламы
                   const updateAdsResponse = await axios.post(
                     `${REACT_APP_BACKEND_URL}/update-ads-watched`,
                     { userId }
@@ -180,10 +176,10 @@ const showAd = async () => {
                   if (adsUpdateData.success) {
                     console.log('Количество просмотров рекламы обновлено:', adsUpdateData.adsWatched);
                     //setAdsWatched(adsUpdateData.adsWatched);
-                    setAdsCompletionCount(adsUpdateData.adsCompletionCount); // Обновляем adsCompletionCount
-                    // Запускаем таймер ожидания
+                    setAdsCompletionCount(adsUpdateData.adsCompletionCount); 
+                    
                     setAds(false);
-                    setTimeRemaining(180); // 3 минуты ожидания
+                    setTimeRemaining(180); 
                   } else {
                     console.error('Ошибка при обновлении количества просмотров рекламы:', adsUpdateData.message);
                   }
@@ -232,6 +228,11 @@ const showAd = async () => {
     setTimeout(() => {
       checkSubscriptionAndUpdate(userId);
     }, 3000);
+  };
+  const TgStory = () => {
+   
+    window.Telegram.WebApp.shareToStory("https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg", "Octies");;
+  
   };
 
   // const Tg_Channel_Support = () => {
@@ -441,7 +442,7 @@ useEffect(() => {
                  </div>}
                 <p>+35 $OCTIES for<span id='highlight'> view </span></p>   
                 </div>
-                <img src={racketaMain} id='telefon' alt=''/>
+                <img src={racketaMain} id='telefon' onClick={TgStory}  alt=''/>
               </div>
           
         </div>

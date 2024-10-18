@@ -18,12 +18,13 @@
 // export default PlayToEarn;
 
 import React, { useEffect, useState } from 'react';
+import '../Css/P2e.css';
+
 
 const PlayToEarn = () => {
   const [userId, setUserId] = useState(null);
 
   useEffect(() => {
-    // Получаем userId из параметров или контекста приложения
     const urlParams = new URLSearchParams(window.location.search);
     const userIdFromTelegram = urlParams.get('userId');
     setUserId(userIdFromTelegram);

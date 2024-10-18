@@ -1,0 +1,9 @@
+body {
+    text-align: center;
+}
+
+#board {
+    background-image: url('../IMG/Doodle_jump/doodlejumpbg.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
