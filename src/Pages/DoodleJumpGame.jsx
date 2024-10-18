@@ -7,6 +7,8 @@ import '../Css/doodlejump.css';
 
 
 
+
+
 const DoodleJumpGame = () => {
   const canvasRef = useRef(null);
 
@@ -20,8 +22,8 @@ const DoodleJumpGame = () => {
     board.height = boardHeight;
 
     // Размеры и объекты
-    let doodlerWidth = 60; // Фиксированная ширина дудлера
-    let doodlerHeight = 60; // Фиксированная высота дудлера
+    let doodlerWidth = 60;
+    let doodlerHeight = 60;
     let doodlerRightImg = new Image();
     let doodlerLeftImg = new Image();
     let platformImg = new Image();
@@ -37,13 +39,13 @@ const DoodleJumpGame = () => {
     // Физика
     let velocityX = 0;
     let velocityY = 0;
-    let initialVelocityY = -15; // Фиксированная скорость прыжка
-    let gravity = 0.5;          // Фиксированная гравитация
+    let initialVelocityY = -15;
+    let gravity = 0.5;
 
     // Платформы
     let platformArray = [];
-    let platformWidth = 85;  // Фиксированная ширина платформы
-    let platformHeight = 20; // Фиксированная высота платформы
+    let platformWidth = 85;
+    let platformHeight = 20;
 
     let score = 0;
     let maxScore = 0;
@@ -69,9 +71,9 @@ const DoodleJumpGame = () => {
     placePlatforms();
     requestAnimationFrame(update);
 
-    // Добавляем обработчики сенсорных событий
-    document.addEventListener('touchstart', handleTouchStart);
-    document.addEventListener('touchend', handleTouchEnd);
+    // Добавляем обработчики сенсорных событий на Canvas
+    board.addEventListener('touchstart', handleTouchStart, { passive: false });
+    board.addEventListener('touchend', handleTouchEnd, { passive: false });
 
     // Обработка изменения размера окна
     const resizeCanvas = () => {
@@ -92,9 +94,8 @@ const DoodleJumpGame = () => {
     // Очищаем обработчики при размонтировании
     return () => {
       window.removeEventListener('resize', resizeCanvas);
-      // document.removeEventListener('keydown', moveDoodler);
-      document.removeEventListener('touchstart', handleTouchStart);
-      document.removeEventListener('touchend', handleTouchEnd);
+      board.removeEventListener('touchstart', handleTouchStart);
+      board.removeEventListener('touchend', handleTouchEnd);
     };
 
     // Функция обновления игры
@@ -173,6 +174,9 @@ const DoodleJumpGame = () => {
     let touchX = null;
 
     function handleTouchStart(e) {
+      e.preventDefault();
+      console.log('Touch Start');
+
       touchX = e.touches[0].clientX;
 
       if (gameOver && !touchStarted) {
@@ -200,6 +204,8 @@ const DoodleJumpGame = () => {
     }
 
     function handleTouchEnd(e) {
+      e.preventDefault();
+      console.log('Touch End');
       velocityX = 0;
     }
 
@@ -207,7 +213,7 @@ const DoodleJumpGame = () => {
     function placePlatforms() {
       platformArray = [];
 
-      const gapBetweenPlatforms = 100; // Зазор между платформами
+      const gapBetweenPlatforms = 100;
       const numberOfPlatforms = Math.ceil(boardHeight / (platformHeight + gapBetweenPlatforms));
 
       for (let i = 0; i < numberOfPlatforms; i++) {
@@ -275,6 +281,7 @@ const DoodleJumpGame = () => {
       style={{
         display: 'block',
         margin: '0 auto',
+        touchAction: 'none',
       }}
     ></canvas>
   );
