@@ -47,7 +47,6 @@ import { P2e_Soon, P2e_OctiesCosmo,
 
 const REACT_APP_BACKEND_URL = 'https://testforeveryoneback-production.up.railway.app';
 
-
 function App() {
 
   const [userId, setUserId] = useState(null); 
