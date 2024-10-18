@@ -1,10 +1,9 @@
 import React, { useRef, useEffect } from 'react';
-import doodlerRightSrc from '../IMG/Doodle_jump/doodler-right.png';
-import doodlerLeftSrc from '../IMG/Doodle_jump/doodler-left.png';
+import doodlerRightSrc from '../IMG/Doodle_jump/MainCharacter_left.png';
+import doodlerLeftSrc from '../IMG/Doodle_jump/MainCharacter_left.png';
 import platformSrc from '../IMG/Doodle_jump/platform.png';
-import backgroundSrc from '../IMG/Doodle_jump/doodlejumpbg.png';
+import backgroundSrc from '../IMG/Doodle_jump/Background_game.png';
 import '../Css/doodlejump.css';
-
 
 
 
