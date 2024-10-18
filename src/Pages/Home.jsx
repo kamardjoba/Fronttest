@@ -8,7 +8,6 @@ import { Reward_Age, Reward_Premium, Reward_Chanel,
          Reward_pass_ticket,  Reward_hz_sho_ce_kakoito_karandash,
          Reward_racketa, Reward_Ads} from "../IMG/Reward_icon";
 
-
 //import image SwapTask
 import AnyTapChanel from '../IMG/All_Logo/AnyTapChanel.png';
 import tgLogo from '../IMG/All_Logo/TgComunity.png';
@@ -54,12 +53,12 @@ function Home({Galo4ka, Knopka, Galo4kaX, KnopkaX,  GalkaAnyTap, KnopkaAnyTap, K
   useEffect(() => {
     if (window.Adsgram) {
         AdControllerRef.current = window.Adsgram.init({
-            blockId: "4141", // замените на ваш реальный blockId
-            debug: false, // отключите в продакшене
-            debugBannerType: "FullscreenMedia" // тип тестового баннера, если debug включен
+            blockId: "4141", 
+            debug: false, 
+            debugBannerType: "FullscreenMedia" 
         });
     }
-}, []); // пустой массив зависимостей для выполнения только один раз
+}, []);
 
 // const showAd = async () => {
 //   try {
@@ -229,6 +228,11 @@ const showAd = async () => {
     setTimeout(() => {
       checkSubscriptionAndUpdate(userId);
     }, 3000);
+  };
+  const TgStory = () => {
+   
+    window.Telegram.WebApp.shareToStory("https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg");;
+  
   };
 
   // const Tg_Channel_Support = () => {
