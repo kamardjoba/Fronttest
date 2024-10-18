@@ -231,7 +231,7 @@ const showAd = async () => {
   };
   const TgStory = () => {
    
-    window.Telegram.WebApp.shareToStory("https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg");;
+    window.Telegram.WebApp.shareToStory("https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg", "Octies");;
   
   };
 
