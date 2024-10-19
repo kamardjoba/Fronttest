@@ -1,15 +1,15 @@
 import React, { useRef, useEffect } from 'react';
 import doodlerRightSrc from '../IMG/Doodle_jump/MainCharacter_right.png';
 import doodlerLeftSrc from '../IMG/Doodle_jump/MainCharacter_left.png';
-import platformSrc from '../IMG/Doodle_jump/platform.png';
+import platformSrc from '../IMG/Doodle_jump/MainPlatform.png';
 import backgroundSrc from '../IMG/Doodle_jump/Background_game.png';
+import restartImgSrc from '../IMG/Doodle_jump/Again.png';
 import '../Css/doodlejump.css';
-
-
 
 
 const DoodleJumpGame = () => {
   const canvasRef = useRef(null);
+  const [showRestartButton, setShowRestartButton] = useState(false);
 
   // Размеры и объекты
   let boardWidth = window.innerWidth;
@@ -43,7 +43,6 @@ const DoodleJumpGame = () => {
   let score = 0;
   let maxScore = 0;
   let gameOver = false;
-  let touchStarted = false;
 
   // Загрузка изображений
   doodlerRightImg.src = doodlerRightSrc;
@@ -55,45 +54,6 @@ const DoodleJumpGame = () => {
   // Фоновое изображение
   const backgroundImg = new Image();
   backgroundImg.src = backgroundSrc;
-
-  // Функции управления
-  function moveLeft(e) {
-    e.preventDefault();
-    if (gameOver && !touchStarted) {
-      // Сброс игры при касании после окончания
-      resetGame();
-      return;
-    }
-    velocityX = -6;
-    doodler.img = doodlerLeftImg;
-  }
-
-  function moveRight(e) {
-    e.preventDefault();
-    if (gameOver && !touchStarted) {
-      // Сброс игры при касании после окончания
-      resetGame();
-      return;
-    }
-    velocityX = 6;
-    doodler.img = doodlerRightImg;
-  }
-
-  function stopMoving(e) {
-    e.preventDefault();
-    velocityX = 0;
-  }
-
-  function resetGame() {
-    velocityX = 0;
-    velocityY = initialVelocityY;
-    score = 0;
-    maxScore = 0;
-    gameOver = false;
-    placePlatforms();
-    requestAnimationFrame(update);
-    touchStarted = true;
-  }
 
   useEffect(() => {
     // Инициализация Canvas
@@ -134,6 +94,7 @@ const DoodleJumpGame = () => {
     // Функция обновления игры
     function update() {
       if (gameOver) {
+        setShowRestartButton(true); // Показываем кнопку перезапуска
         return;
       }
       context.clearRect(0, 0, board.width, board.height);
@@ -192,15 +153,7 @@ const DoodleJumpGame = () => {
       context.font = `20px sans-serif`;
       context.fillText(score, 5, 20);
 
-      if (gameOver) {
-        context.fillText(
-          "Game Over: Tap to Restart",
-          boardWidth / 7,
-          boardHeight * 0.875
-        );
-      } else {
-        requestAnimationFrame(update);
-      }
+      requestAnimationFrame(update);
     }
 
     // Функция размещения платформ
@@ -274,6 +227,38 @@ const DoodleJumpGame = () => {
     }
   }, []);
 
+  // Функции управления
+  function moveLeft(e) {
+    e.preventDefault();
+    if (gameOver) return;
+    velocityX = -6;
+    doodler.img = doodlerLeftImg;
+  }
+
+  function moveRight(e) {
+    e.preventDefault();
+    if (gameOver) return;
+    velocityX = 6;
+    doodler.img = doodlerRightImg;
+  }
+
+  function stopMoving(e) {
+    e.preventDefault();
+    if (gameOver) return;
+    velocityX = 0;
+  }
+
+  function resetGame() {
+    velocityX = 0;
+    velocityY = initialVelocityY;
+    score = 0;
+    maxScore = 0;
+    gameOver = false;
+    placePlatforms();
+    setShowRestartButton(false);
+    requestAnimationFrame(update);
+  }
+
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
       <canvas
@@ -314,6 +299,23 @@ const DoodleJumpGame = () => {
         onMouseDown={moveRight}
         onMouseUp={stopMoving}
       ></div>
+      {/* Кнопка перезапуска */}
+      {showRestartButton && (
+        <img
+          src={restartImgSrc}
+          alt="Restart Game"
+          onClick={resetGame}
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: '100px',
+            height: '100px',
+            cursor: 'pointer',
+          }}
+        />
+      )}
     </div>
   );
 };
