@@ -7,3 +7,40 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
 }
+
+.restart{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.restart_click{
+    width: 20%;
+    height: 20%;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-image: url('../IMG/Doodle_jump/Again.png');
+    background-size: contain;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.movement{
+ position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+
+}

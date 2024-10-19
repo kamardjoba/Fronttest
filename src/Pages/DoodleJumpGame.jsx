@@ -284,51 +284,27 @@ const DoodleJumpGame = () => {
           touchAction: 'none',
         }}
       ></canvas>
-      {/* Кнопки управления */}
-      <div
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '50%',
-          height: '100%',
-          // backgroundColor: 'rgba(255, 0, 0, 0.1)', // Можно раскомментировать для отладки
-        }}
+      {/* MOVement */}
+      <div className='movement'
         onTouchStart={moveLeft}
         onTouchEnd={stopMoving}
         onMouseDown={moveLeft}
         onMouseUp={stopMoving}
       ></div>
-      <div
-        style={{
-          position: 'absolute',
-          top: 0,
-          right: 0,
-          width: '50%',
-          height: '100%',
-          // backgroundColor: 'rgba(0, 0, 255, 0.1)', // Можно раскомментировать для отладки
-        }}
+      <div className='movement'
         onTouchStart={moveRight}
         onTouchEnd={stopMoving}
         onMouseDown={moveRight}
         onMouseUp={stopMoving}
       ></div>
-      {/* Кнопка перезапуска */}
+      {/* REstart */}
       {showRestartButton && (
-        <img
-          src={restartImgSrc}
-          alt="Restart Game"
-          onClick={resetGame}
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '100px',
-            height: '100px',
-            cursor: 'pointer',
-          }}
-        />
+        <div className='restart'>
+          {/* Кнопка перезапуска */}
+           <div className='restart_click' onClick={resetGame}>
+            REstart
+          </div>
+        </div>
       )}
     </div>
   );
