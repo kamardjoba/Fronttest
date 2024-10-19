@@ -285,13 +285,13 @@ const DoodleJumpGame = () => {
         }}
       ></canvas>
       {/* MOVement */}
-      <div className='movement'
+      <div className='movement-left'
         onTouchStart={moveLeft}
         onTouchEnd={stopMoving}
         onMouseDown={moveLeft}
         onMouseUp={stopMoving}
       ></div>
-      <div className='movement'
+      <div className='movement-right'
         onTouchStart={moveRight}
         onTouchEnd={stopMoving}
         onMouseDown={moveRight}
