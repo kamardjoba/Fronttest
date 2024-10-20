@@ -6,7 +6,7 @@ import { Reward_Age, Reward_Premium, Reward_Chanel,
          Reward_Invite, Reward_X, Reward_PartnerChanels,
          Reward_NFT, Reward_Nick, Reward_pass,
          Reward_pass_ticket,  Reward_hz_sho_ce_kakoito_karandash,
-         Reward_racketa, Reward_Ads} from "../IMG/Reward_icon";
+         Reward_racketa, telegramLink, Reward_Ads} from "../IMG/Reward_icon";
 
 //import image SwapTask
 import AnyTapChanel from '../IMG/All_Logo/AnyTapChanel.png';
@@ -232,7 +232,7 @@ const showAd = async () => {
   const TgStory = () => {
     window.Telegram.WebApp.shareToStory(
       "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
-      { text: "Octies" }
+      { text: `https://t.me/share/url?url=${encodeURIComponent(telegramLink)}` }
     );
   };
 
