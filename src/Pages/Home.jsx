@@ -229,18 +229,37 @@ const showAd = async () => {
       checkSubscriptionAndUpdate(userId);
     }, 3000);
   };
+  // const TgStory = () => {
+  //   console.log("linkref", telegramLink);
+  //   const options = {
+  //     text: "Octies",
+  //     link: telegramLink, // Добавляем ссылку
+      
+  //   };
+  
+  //     window.Telegram.WebApp.shareToStory(
+  //       "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
+  //       options
+      
+  //     )
+  // };
+
   const TgStory = () => {
-    console.log("linkref", telegramLink);
     const options = {
       text: "Octies",
-      link: telegramLink, // Добавляем ссылку
-      
+      link: telegramLink,
     };
   
-      window.Telegram.WebApp.shareToStory(
-        "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
-        options
-      )
+    // Проверяем, является ли пользователь премиум
+    const isPremiumUser = window.Telegram.WebApp.initDataUnsafe?.user?.premium;
+  
+    console.log('isPremiumUser:', isPremiumUser);
+    console.log('options before share:', options);
+  
+    window.Telegram.WebApp.shareToStory(
+      "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
+      options
+    );
   };
   // const Tg_Channel_Support = () => {
   //   const userId = new URLSearchParams(window.location.search).get('userId');
