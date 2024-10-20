@@ -17,15 +17,32 @@ body {
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
 }
 
 .restart_click{
     width: 25%;
-    height: 25%;
+    height: 10%;
     cursor: pointer;
     background-repeat: no-repeat;
     background-image: url('../IMG/Doodle_jump/Again.png');
+    background-size: contain;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.menu_click{
+    width: 25%;
+    height: 10%;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-image: url('../IMG/Doodle_jump/Menu.png');
     background-size: contain;
     background-position: center;
     display: flex;
