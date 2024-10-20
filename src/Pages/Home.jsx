@@ -230,18 +230,13 @@ const showAd = async () => {
     }, 3000);
   };
   const TgStory = () => {
-    const shareStoryParams = {
-      media_url: "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
-      text: "Octies",  // Текст для истории
-      widget_link: { url: "https://yourwidgeturl.com", name: "Octies" },  // Ссылка на виджет
-    };
-  
     window.Telegram.WebApp.shareToStory(
-      shareStoryParams.media_url,
-      { text: shareStoryParams.text },
-      { url: shareStoryParams.widget_link.url, name: shareStoryParams.widget_link.name }
+      "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
+      { text: "Octies" },  // Текст для истории
+      { url: "https://yourwidgeturl.com", name: "Octies" }  // Ссылка на виджет
     );
   };
+  
   
 
   // const Tg_Channel_Support = () => {
