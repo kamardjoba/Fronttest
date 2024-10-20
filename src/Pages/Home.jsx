@@ -34,7 +34,7 @@ import clock from '../IMG/All_Logo/clock.png';
 function Home({Galo4ka, Knopka, Galo4kaX, KnopkaX,  GalkaAnyTap, KnopkaAnyTap, KnopkaNick, 
     Ton5Succes, hasTelegramPremium, accountAgeCoins, transactionNumber,
      coins, setYearsOpen, isMint, subscriptionCoins, referralCoins, REACT_APP_BACKEND_URL,  userId, checkSubscriptionAndUpdate , setCoins,
-     AdsWatched,coinsAdd, shapka3, yoda, ksm, telegramLink, Galo4kaBee, setGalo4kaBee, KnopkaBee, setKnopkaBee
+     AdsWatched,coinsAdd, shapka3, yoda, ksm, referralCode, Galo4kaBee, setGalo4kaBee, KnopkaBee, setKnopkaBee
  }) {
 
   const TG_CHANNEL_LINK = "https://t.me/octies_community";
@@ -247,7 +247,6 @@ const showAd = async () => {
       story.widget_link
     );
   };
-  
   
 
   // const Tg_Channel_Support = () => {
