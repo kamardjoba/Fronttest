@@ -236,7 +236,7 @@ const showAd = async () => {
       media_url: "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
       text: "Octies",
       widget_link: {
-        url: "https://yourwidgeturl.com",
+        url: "https://docs.telegram-mini-apps.com/platform/methods#web-app-share-to-story",
         name: "Octies"
       }
     };
@@ -244,7 +244,7 @@ const showAd = async () => {
     window.Telegram.WebApp.shareToStory(
       story.media_url, 
       { text: story.text }, 
-      story.widget_link
+      story.widget_link 
     );
   };
   
