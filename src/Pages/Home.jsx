@@ -232,10 +232,14 @@ const showAd = async () => {
   const TgStory = () => {
     window.Telegram.WebApp.shareToStory(
       "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
-      { text: `https://t.me/share/url?url=${encodeURIComponent(telegramLink)}` }
+      {
+        text: "Octies",
+        link: `https://t.me/share/url?url=${encodeURIComponent(telegramLink)}`
+      }
     );
   };
 
+  
   // const Tg_Channel_Support = () => {
   //   const userId = new URLSearchParams(window.location.search).get('userId');
   //   window.Telegram.WebApp.HapticFeedback.impactOccurred('heavy');
@@ -244,6 +248,7 @@ const showAd = async () => {
   //     checkSubscriptionAndUpdate(userId);
   //   }, 3000);
   // };
+
 
   const Tg_Channel_Open_X = async () => {
     window.Telegram.WebApp.HapticFeedback.impactOccurred('heavy');
