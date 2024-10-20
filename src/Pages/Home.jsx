@@ -6,7 +6,7 @@ import { Reward_Age, Reward_Premium, Reward_Chanel,
          Reward_Invite, Reward_X, Reward_PartnerChanels,
          Reward_NFT, Reward_Nick, Reward_pass,
          Reward_pass_ticket,  Reward_hz_sho_ce_kakoito_karandash,
-         Reward_racketa, Reward_Ads} from "../IMG/Reward_icon";
+         Reward_racketa,  Reward_Ads} from "../IMG/Reward_icon";
 
 //import image SwapTask
 import AnyTapChanel from '../IMG/All_Logo/AnyTapChanel.png';
@@ -34,7 +34,7 @@ import clock from '../IMG/All_Logo/clock.png';
 function Home({Galo4ka, Knopka, Galo4kaX, KnopkaX,  GalkaAnyTap, KnopkaAnyTap, KnopkaNick, 
     Ton5Succes, hasTelegramPremium, accountAgeCoins, transactionNumber,
      coins, setYearsOpen, isMint, subscriptionCoins, referralCoins, REACT_APP_BACKEND_URL,  userId, checkSubscriptionAndUpdate , setCoins,
-     AdsWatched,coinsAdd, shapka3, yoda, ksm, telegramLink,Galo4kaBee, setGalo4kaBee, KnopkaBee, setKnopkaBee
+     AdsWatched,coinsAdd, shapka3, yoda, ksm, telegramLink, Galo4kaBee, setGalo4kaBee, KnopkaBee, setKnopkaBee
  }) {
 
   const TG_CHANNEL_LINK = "https://t.me/octies_community";
@@ -229,9 +229,13 @@ const showAd = async () => {
       checkSubscriptionAndUpdate(userId);
     }, 3000);
   };
-
-  
-  
+  const TgStory = () => {
+    window.Telegram.WebApp.shareToStory(
+      "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
+      { text: "Octies" },  // Текст для истории
+      { url: "https://yourwidgeturl.com", name: "Octies" }  // Ссылка на виджет
+    );
+  };
 
   // const Tg_Channel_Support = () => {
   //   const userId = new URLSearchParams(window.location.search).get('userId');
@@ -241,7 +245,7 @@ const showAd = async () => {
   //     checkSubscriptionAndUpdate(userId);
   //   }, 3000);
   // };
-
+  
 
   const Tg_Channel_Open_X = async () => {
     window.Telegram.WebApp.HapticFeedback.impactOccurred('heavy');
