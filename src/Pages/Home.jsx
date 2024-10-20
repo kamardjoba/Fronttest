@@ -229,26 +229,18 @@ const showAd = async () => {
       checkSubscriptionAndUpdate(userId);
     }, 3000);
   };
-
-  
   const TgStory = () => {
-    const story = {
-      media_url: "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
-      text: "Octies",
-      widget_link: {
-        url: "https://yourwidgeturl.com",
-        name: "Octies"
-      }
-    };
-  
+    const referralCode = "yourReferralCode"; // Замените на ваш реальный реферальный код
+    const link = "https://t.me/test_for_everyone_bot?start=" + referralCode;
+    
     window.Telegram.WebApp.shareToStory(
-      story.media_url, 
-      { text: story.text }, 
-      story.widget_link
+      "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
+      {
+        text: "Octies",
+        link: link
+      }
     );
   };
-  
-
   // const Tg_Channel_Support = () => {
   //   const userId = new URLSearchParams(window.location.search).get('userId');
   //   window.Telegram.WebApp.HapticFeedback.impactOccurred('heavy');
