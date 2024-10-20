@@ -229,13 +229,26 @@ const showAd = async () => {
       checkSubscriptionAndUpdate(userId);
     }, 3000);
   };
+
+  
   const TgStory = () => {
+    const story = {
+      media_url: "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
+      text: "Octies",
+      widget_link: {
+        url: "https://yourwidgeturl.com",
+        name: "Octies"
+      }
+    };
+  
     window.Telegram.WebApp.shareToStory(
-      "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
-      { text: "Octies" },  // Текст для истории
-      { url: "https://yourwidgeturl.com", name: "Octies" }  // Ссылка на виджет
+      story.media_url, 
+      { text: story.text }, 
+      story.widget_link
     );
   };
+  
+  
 
   // const Tg_Channel_Support = () => {
   //   const userId = new URLSearchParams(window.location.search).get('userId');
