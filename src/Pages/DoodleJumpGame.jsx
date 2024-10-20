@@ -3,8 +3,9 @@ import doodlerRightSrc from '../IMG/Doodle_jump/MainCharacter_right.png';
 import doodlerLeftSrc from '../IMG/Doodle_jump/MainCharacter_left.png';
 import platformSrc from '../IMG/Doodle_jump/MainPlatform.png';
 import backgroundSrc from '../IMG/Doodle_jump/Background_game.png';
-import restartImgSrc from '../IMG/Doodle_jump/Again.png';
+import coinImgSrc from '../IMG/Doodle_jump/coin.png';
 import '../Css/doodlejump.css';
+
 
 
 
@@ -14,7 +15,6 @@ const DoodleJumpGame = () => {
   const contextRef = useRef(null);
   const [showRestartButton, setShowRestartButton] = useState(false);
 
-  // Размеры и объекты
   let boardWidth = window.innerWidth;
   let boardHeight = window.innerHeight;
 
@@ -24,6 +24,7 @@ const DoodleJumpGame = () => {
   const doodlerRightImg = useRef(new Image());
   const doodlerLeftImg = useRef(new Image());
   const platformImg = useRef(new Image());
+  const coinImg = useRef(new Image());
 
   const doodler = useRef({
     img: null,
@@ -33,13 +34,11 @@ const DoodleJumpGame = () => {
     height: doodlerHeight,
   });
 
-  // Физика
   const velocityX = useRef(0);
   const velocityY = useRef(0);
   const initialVelocityY = useRef(-15);
   const gravity = useRef(0.5);
 
-  // Платформы
   const platformArray = useRef([]);
   let platformWidth = 85;
   let platformHeight = 20;
@@ -47,23 +46,22 @@ const DoodleJumpGame = () => {
   const score = useRef(0);
   const maxScore = useRef(0);
   const gameOver = useRef(false);
+  const coinsCollected = useRef(0); 
 
-  // Загрузка изображений
   doodlerRightImg.current.src = doodlerRightSrc;
   doodlerLeftImg.current.src = doodlerLeftSrc;
   platformImg.current.src = platformSrc;
+  coinImg.current.src = coinImgSrc;
 
   doodler.current.img = doodlerRightImg.current;
 
-  // Фоновое изображение
   const backgroundImg = useRef(new Image());
   backgroundImg.current.src = backgroundSrc;
 
   useEffect(() => {
-    // Инициализация Canvas
     const board = canvasRef.current;
     const context = board.getContext('2d');
-    contextRef.current = context; // Сохраняем контекст в ref
+    contextRef.current = context; 
     board.width = boardWidth;
     board.height = boardHeight;
 
@@ -75,40 +73,45 @@ const DoodleJumpGame = () => {
     placePlatforms();
     requestAnimationFrame(update);
 
-    // Обработка изменения размера окна
     const resizeCanvas = () => {
       boardWidth = window.innerWidth;
       boardHeight = window.innerHeight;
       board.width = boardWidth;
       board.height = boardHeight;
 
-      // Перерисовываем фон
-      contextRef.current.drawImage(backgroundImg.current, 0, 0, boardWidth, boardHeight);
+      contextRef.current.drawImage(
+        backgroundImg.current,
+        0,
+        0,
+        boardWidth,
+        boardHeight
+      );
 
-      // Переразмещаем платформы
       placePlatforms();
     };
 
     window.addEventListener('resize', resizeCanvas);
 
-    // Очищаем обработчики при размонтировании
     return () => {
       window.removeEventListener('resize', resizeCanvas);
     };
   }, []);
 
-  // Функция обновления игры
   function update() {
     if (gameOver.current) {
-      setShowRestartButton(true); // Показываем кнопку перезапуска
+      setShowRestartButton(true);
       return;
     }
     contextRef.current.clearRect(0, 0, boardWidth, boardHeight);
 
-    // Отрисовка фона
-    contextRef.current.drawImage(backgroundImg.current, 0, 0, boardWidth, boardHeight);
+    contextRef.current.drawImage(
+      backgroundImg.current,
+      0,
+      0,
+      boardWidth,
+      boardHeight
+    );
 
-    // Обновление позиции дудлера
     doodler.current.x += velocityX.current;
     if (doodler.current.x > boardWidth) {
       doodler.current.x = 0 - doodler.current.width;
@@ -129,7 +132,6 @@ const DoodleJumpGame = () => {
       doodler.current.height
     );
 
-    // Обновление платформ
     for (let i = 0; i < platformArray.current.length; i++) {
       let platform = platformArray.current[i];
       if (
@@ -137,6 +139,9 @@ const DoodleJumpGame = () => {
         doodler.current.y < boardHeight * 0.75
       ) {
         platform.y -= initialVelocityY.current;
+        if (platform.coin) {
+          platform.coin.y -= initialVelocityY.current;
+        }
       }
       if (
         detectCollision(doodler.current, platform) &&
@@ -144,6 +149,7 @@ const DoodleJumpGame = () => {
       ) {
         velocityY.current = initialVelocityY.current;
       }
+
       contextRef.current.drawImage(
         platform.img,
         platform.x,
@@ -151,9 +157,23 @@ const DoodleJumpGame = () => {
         platform.width,
         platform.height
       );
+
+      if (platform.coin) {
+        contextRef.current.drawImage(
+          platform.coin.img,
+          platform.coin.x,
+          platform.coin.y,
+          platform.coin.width,
+          platform.coin.height
+        );
+
+        if (detectCollision(doodler.current, platform.coin)) {
+          coinsCollected.current += 1; 
+          platform.coin = null; 
+        }
+      }
     }
 
-    // Удаление старых платформ и добавление новых
     while (
       platformArray.current.length > 0 &&
       platformArray.current[0].y >= boardHeight
@@ -162,16 +182,21 @@ const DoodleJumpGame = () => {
       newPlatform();
     }
 
-    // Обновление счета
     updateScore();
+
     contextRef.current.fillStyle = 'black';
     contextRef.current.font = `20px sans-serif`;
-    contextRef.current.fillText(score.current, 5, 20);
+    contextRef.current.fillText(`Score: ${score.current}`, 5, 20);
+
+    contextRef.current.fillText(
+      `Coins: ${coinsCollected.current}`,
+      5,
+      45
+    );
 
     requestAnimationFrame(update);
   }
 
-  // Функция размещения платформ
   function placePlatforms() {
     platformArray.current = [];
 
@@ -192,19 +217,29 @@ const DoodleJumpGame = () => {
           platformHeight,
         width: platformWidth,
         height: platformHeight,
+        coin: null,
       };
+
+      if (Math.random() < 0.3) {
+        // 30% вероятность появления монеты
+        platform.coin = {
+          img: coinImg.current,
+          x: platform.x + platform.width / 2 - 15,
+          y: platform.y - 30,
+          width: 30,
+          height: 30,
+        };
+      }
 
       platformArray.current.push(platform);
     }
 
-    // Устанавливаем дудлера на первую платформу
     let firstPlatform = platformArray.current[0];
     doodler.current.x =
       firstPlatform.x + firstPlatform.width / 2 - doodler.current.width / 2;
     doodler.current.y = firstPlatform.y - doodler.current.height;
   }
 
-  // Функция создания новой платформы
   function newPlatform() {
     let randomX = Math.floor(Math.random() * (boardWidth - platformWidth));
     let platform = {
@@ -213,12 +248,23 @@ const DoodleJumpGame = () => {
       y: -platformHeight,
       width: platformWidth,
       height: platformHeight,
+      coin: null,
     };
+
+    // Случайным образом решаем, будет ли монета на платформе
+    if (Math.random() < 0.3) {
+      platform.coin = {
+        img: coinImg.current,
+        x: platform.x + platform.width / 2 - 15,
+        y: platform.y - 30,
+        width: 30,
+        height: 30,
+      };
+    }
 
     platformArray.current.push(platform);
   }
 
-  // Функция обнаружения столкновения
   function detectCollision(a, b) {
     return (
       a.x < b.x + b.width &&
@@ -228,7 +274,6 @@ const DoodleJumpGame = () => {
     );
   }
 
-  // Функция обновления счета
   function updateScore() {
     let points = Math.floor(50 * Math.random());
     if (velocityY.current < 0) {
@@ -241,7 +286,6 @@ const DoodleJumpGame = () => {
     }
   }
 
-  // Функции управления
   function moveLeft(e) {
     e.preventDefault();
     if (gameOver.current) return;
@@ -267,6 +311,7 @@ const DoodleJumpGame = () => {
     velocityY.current = initialVelocityY.current;
     score.current = 0;
     maxScore.current = 0;
+    coinsCollected.current = 0;
     gameOver.current = false;
     placePlatforms();
     setShowRestartButton(false);
