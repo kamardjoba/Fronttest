@@ -220,7 +220,7 @@ const DoodleJumpGame = () => {
         coin: null,
       };
 
-      if (Math.random() < 0.3) {
+      if (Math.random() < 0.2) {
         // 30% вероятность появления монеты
         platform.coin = {
           img: coinImg.current,
