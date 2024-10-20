@@ -245,21 +245,19 @@ const showAd = async () => {
   // };
 
   const TgStory = () => {
-   
+ 
+    
+  
+    const mediaUrl = "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg"; // Ваше изображение
+  
     const options = {
-      background: {
-        url: "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
-        type: "image", // или "video", если вы используете видео
-      },
-      content: {
-        message: "Octies",
-        link: telegramLink, // Ваша ссылка
-      },
-
+      text: "Octies",
+      link: telegramLink, 
     };
-    console.log('telegramLink:', telegramLink);
-  console.log('options:', options);
-      window.Telegram.WebApp.showStory(options)
+  
+
+      window.Telegram.WebApp.shareToStory(mediaUrl, options)
+        
   };
   // const Tg_Channel_Support = () => {
   //   const userId = new URLSearchParams(window.location.search).get('userId');
