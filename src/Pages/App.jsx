@@ -559,7 +559,7 @@ const handleCheckReferrals = () => {
                                   transactionNumber={transactionNumber} coins={coins} setYearsOpen={setYearsOpen} isMint={isMint} 
                                   subscriptionCoins={subscriptionCoins} referralCoins={referralCoins} REACT_APP_BACKEND_URL={REACT_APP_BACKEND_URL} checkSubscriptionAndUpdate={checkSubscriptionAndUpdate }
                                   userId={userId}  setCoins={ setCoins} Galo4kaBee={Galo4kaBee} setGalo4kaBee={setGalo4kaBee} KnopkaBee={KnopkaBee} setKnopkaBee={setKnopkaBee} shapka3={shapka3}
-                                  yoda={yoda} ksm={ksm} telegramLink={telegramLink} />}/>
+                                  yoda={yoda} ksm={ksm} referralCode={referralCode} />}/>
 
         <Route path="/leaderboard" element={<Leaderboard userId={userId} coins={coins} getRandomColor={getRandomColor}/>} />
 
