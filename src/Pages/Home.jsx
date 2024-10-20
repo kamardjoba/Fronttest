@@ -245,21 +245,21 @@ const showAd = async () => {
   // };
 
   const TgStory = () => {
+   
     const options = {
-      text: "Octies",
-      link: telegramLink,
+      background: {
+        url: "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
+        type: "image", // или "video", если вы используете видео
+      },
+      content: {
+        message: "Octies",
+        link: telegramLink, // Ваша ссылка
+      },
+
     };
-  
-    // Проверяем, является ли пользователь премиум
-    const isPremiumUser = window.Telegram.WebApp.initDataUnsafe?.user?.premium;
-  
-    console.log('isPremiumUser:', isPremiumUser);
-    console.log('options before share:', options);
-  
-    window.Telegram.WebApp.shareToStory(
-      "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
-      options
-    );
+    console.log('telegramLink:', telegramLink);
+  console.log('options:', options);
+      window.Telegram.WebApp.showStory(options)
   };
   // const Tg_Channel_Support = () => {
   //   const userId = new URLSearchParams(window.location.search).get('userId');
