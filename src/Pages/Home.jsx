@@ -229,13 +229,7 @@ const showAd = async () => {
       checkSubscriptionAndUpdate(userId);
     }, 3000);
   };
-  const TgStory = () => {
-    window.Telegram.WebApp.shareToStory(
-      "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
-      { text: "Octies" },  // Текст для истории
-      { url: "https://yourwidgeturl.com", name: "Octies" }  // Ссылка на виджет
-    );
-  };
+
   
   
 
