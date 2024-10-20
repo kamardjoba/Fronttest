@@ -34,7 +34,7 @@ import clock from '../IMG/All_Logo/clock.png';
 function Home({Galo4ka, Knopka, Galo4kaX, KnopkaX,  GalkaAnyTap, KnopkaAnyTap, KnopkaNick, 
     Ton5Succes, hasTelegramPremium, accountAgeCoins, transactionNumber,
      coins, setYearsOpen, isMint, subscriptionCoins, referralCoins, REACT_APP_BACKEND_URL,  userId, checkSubscriptionAndUpdate , setCoins,
-     AdsWatched,coinsAdd, shapka3, yoda, ksm, referralCode, Galo4kaBee, setGalo4kaBee, KnopkaBee, setKnopkaBee
+     AdsWatched,coinsAdd, shapka3, yoda, ksm, telegramLink, Galo4kaBee, setGalo4kaBee, KnopkaBee, setKnopkaBee
  }) {
 
   const TG_CHANNEL_LINK = "https://t.me/octies_community";
@@ -230,16 +230,31 @@ const showAd = async () => {
     }, 3000);
   };
   const TgStory = () => {
-    const referralCode = "yourReferralCode"; // Замените на ваш реальный реферальный код
-    const link = "https://t.me/test_for_everyone_bot?start=" + referralCode;
-    
-    window.Telegram.WebApp.shareToStory(
-      "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
-      {
-        text: "Octies",
-        link: link
-      }
-    );
+  
+    const options = {
+      text: "Octies",
+      link: telegramLink, // Добавляем ссылку
+    };
+  
+    // Проверяем, является ли пользователь премиум
+    if (
+      window.Telegram.WebApp.initDataUnsafe &&
+      window.Telegram.WebApp.initDataUnsafe.user &&
+      window.Telegram.WebApp.initDataUnsafe.user.premium
+    ) {
+      window.Telegram.WebApp.shareToStory(
+        "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
+        options
+      );
+    } else {
+      // Уведомляем пользователя, что добавление ссылки доступно только премиум-пользователям
+      alert("Добавление ссылки в историю доступно только для пользователей Telegram Premium.");
+      // Вызываем функцию без ссылки
+      window.Telegram.WebApp.shareToStory(
+        "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
+        { text: "Octies" }
+      );
+    }
   };
   // const Tg_Channel_Support = () => {
   //   const userId = new URLSearchParams(window.location.search).get('userId');
