@@ -230,19 +230,17 @@ const showAd = async () => {
     }, 3000);
   };
   const TgStory = () => {
-  
+    console.log("linkref", telegramLink);
     const options = {
       text: "Octies",
       link: telegramLink, // Добавляем ссылку
+      
     };
   
-    // Проверяем, является ли пользователь премиум
-
       window.Telegram.WebApp.shareToStory(
         "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
         options
       )
-
   };
   // const Tg_Channel_Support = () => {
   //   const userId = new URLSearchParams(window.location.search).get('userId');
