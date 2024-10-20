@@ -237,24 +237,12 @@ const showAd = async () => {
     };
   
     // Проверяем, является ли пользователь премиум
-    if (
-      window.Telegram.WebApp.initDataUnsafe &&
-      window.Telegram.WebApp.initDataUnsafe.user &&
-      window.Telegram.WebApp.initDataUnsafe.user.premium
-    ) {
+
       window.Telegram.WebApp.shareToStory(
         "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
         options
-      );
-    } else {
-      // Уведомляем пользователя, что добавление ссылки доступно только премиум-пользователям
-      alert("Добавление ссылки в историю доступно только для пользователей Telegram Premium.");
-      // Вызываем функцию без ссылки
-      window.Telegram.WebApp.shareToStory(
-        "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
-        { text: "Octies" }
-      );
-    }
+      )
+
   };
   // const Tg_Channel_Support = () => {
   //   const userId = new URLSearchParams(window.location.search).get('userId');
