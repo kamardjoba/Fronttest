@@ -158,9 +158,10 @@ const DoodleJumpGame = () => {
         velocityY.current < 0 &&
         doodler.current.y < boardHeight * 0.75
       ) {
-        platform.y -= initialVelocityY.current;
+        const displacement = -velocityY.current; // velocityY.current отрицательно, поэтому берем отрицательное значение
+        platform.y += displacement;
         if (platform.coin) {
-          platform.coin.y -= initialVelocityY.current;
+          platform.coin.y += displacement;
         }
       }
 
@@ -221,14 +222,22 @@ const DoodleJumpGame = () => {
     }
 
     // Удаление старых платформ и добавление новых
-    while (
-      platformArray.current.length > 0 &&
-      platformArray.current[0].y >= boardHeight
-    ) {
-      platformArray.current.shift();
-      newPlatform();
-    }
+// Удаление старых платформ
+for (let i = 0; i < platformArray.current.length; i++) {
+  if (platformArray.current[i].y >= boardHeight) {
+    platformArray.current.splice(i, 1);
+    i--; // Корректируем индекс после удаления
+  }
+}
 
+// Добавление новых платформ, если их недостаточно
+const gapBetweenPlatforms = 100;
+const numberOfPlatforms = Math.ceil(
+  boardHeight / (platformHeight + gapBetweenPlatforms)
+);
+while (platformArray.current.length < numberOfPlatforms) {
+  newPlatform();
+}
     // Обновление счета
     updateScore();
 
