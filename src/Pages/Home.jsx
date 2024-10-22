@@ -247,17 +247,6 @@ const showAd = async () => {
       story.widget_link 
     );
   };
-  
-
-  // const Tg_Channel_Support = () => {
-  //   const userId = new URLSearchParams(window.location.search).get('userId');
-  //   window.Telegram.WebApp.HapticFeedback.impactOccurred('heavy');
-  //   window.open(Support, '_blank');
-  //   setTimeout(() => {
-  //     checkSubscriptionAndUpdate(userId);
-  //   }, 3000);
-  // };
-  
 
   const Tg_Channel_Open_X = async () => {
     window.Telegram.WebApp.HapticFeedback.impactOccurred('heavy');
@@ -284,53 +273,6 @@ const showAd = async () => {
       }
     }, 5000);
   };
-
-
-
-  // const Open_Ads = async () => {
-  //   setads(false);
-  //   window.Telegram.WebApp.HapticFeedback.impactOccurred('heavy');
-   
-  //   setTimeout(async () => {
-  //     setads(true);
-  //   }, 5000);
-  // };
-
-  
-  // const Tg_Bot_Bee = async () => {
-  //   window.Telegram.WebApp.HapticFeedback.impactOccurred('heavy');
-  //   console.log('Отправляемый userId:', userId);  
-  //   window.open(bot_part, '_blank');
-  //   setTimeout(async () => {
-  //     if (localStorage.getItem('KnopkaBee') === 'true') {
-  //       localStorage.setItem('KnopkaBee', 'false');
-  //       localStorage.setItem('Galo4kaBee', 'true');
-  //       setGalo4kaBee(true);
-  //       setKnopkaBee(false);
-  //       try {
-  //         const response = await axios.post(`${REACT_APP_BACKEND_URL}/update-coins-bot`, { userId: userId, amount: 750 });
-  //         if (response.data.success) {
-  //           setCoins(response.data.coins);
-  //           if (response.data.hasBotSub) {
-  //             localStorage.setItem('hasBotSub', 'true');
-  //             setCoins(response.data.coins);
-  //             console.log('Отправляемый userId:успех');  
-  //           }
-  //         } else {
-  //           console.error('Ошибка при обновлении монет:', response.data.message);
-  //         }
-  //       } catch (error) {
-  //         console.error('Ошибка при обновлении монет:', error);
-  //       }
-  //     }
-  //   }, 5000);};
-  // window.Telegram.WebApp.HapticFeedback.impactOccurred('heavy');
-  // setTimeout(async () => {
-    
-  //     setGalo4kaBee(true);
-  //     setKnopkaBee(false);
-    
-  // }, 5000);
 
 //_______________________________________________________________Task_Swap
 const blockRefs = [useRef(null), useRef(null), useRef(null), useRef(null)];
@@ -525,47 +467,6 @@ useEffect(() => {
               </div>
             </div>
           </div>
-          
-          {/* <div className='MenuBorder' ref={blockRefs[3]}>
-            <div className='flex_menu_border'  id='orangeBack'>
-              <div className='rightFlex'>
-                <div id='up'>
-                  <p >BeeVerse</p>
-                </div>
-                <div id='dp'>
-                  <p>Defeat boss, earn real money rewards</p>
-                </div>
-                <div className='MenuBtn'>
-                  {KnopkaBee && <img onClick={Tg_Bot_Bee} src={Join} alt='Join' />}
-                  <p> {KnopkaBee && <p id="plus">+</p>}750 $OCTIES</p>
-                  {Galo4kaBee && <img id="galo4ka" src={galo4ka} alt='' />}
-                </div>
-              </div>
-              <div className='leftFlex'>
-                <img src={beeVerse} alt=''/>
-              </div>
-            </div>
-          </div>
-
-          <div className='MenuBorder' ref={blockRefs[4]}>
-            <div className='flex_menu_border' id='greenBack'>
-              <div className='rightFlex'>
-                <div  id='up'>
-                  <p>Available Partner Space</p>
-                </div>
-                <div  id='dp'>
-                  <p>Your proposition</p>
-                </div> 
-                <div className='MenuBtn'>
-                  <img onClick={Tg_Channel_Support} src={ContactUs} alt='ContactUs' />
-                  <p>+??? $OCTIES</p>
-                </div>
-              </div>
-              <div className='leftFlex'>
-                <img src={FreePosition} alt=''/>
-              </div>
-            </div>
-          </div> */}
 
           <div className='MenuBorder' ref={blockRefs[3]}>
             <div className='flex_menu_border'>
