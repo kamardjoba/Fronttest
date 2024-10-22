@@ -362,7 +362,7 @@ useEffect(() => {
         <img src={shapka3} id="shapka2" alt=''/>
       </div>
       </div>
-      {!isMint && <div className="main">
+      {/* {!isMint && <div className="main">
         <img src={Octo} alt='Octo' onClick={(event) => {localStorage.clear()}}/>
       </div>}
       {!isMint &&<div className='MainCoin'>
@@ -373,6 +373,13 @@ useEffect(() => {
       {isMint &&<div className='MintCoin'>
         <img src={NFTm} alt='NFTm'/>
         <p id='endtxt'> {coins === 0 ? <p>Loading...</p> : <p>{coins.toLocaleString('en-US')}</p>} <span id='highlight'>{transactionNumber}</span> $OCTIES</p>
+      </div>}
+
+       */}
+
+      {<div className="mainNew">
+          {coins === 0 ? <p>Loading...</p> : <p>{coins.toLocaleString('en-US')} $OCTIES</p>}
+          <p id='endtxt'> {coins === 0 ? <p>Loading...</p> : <p>{coins.toLocaleString('en-US')}</p>} <span id='highlight'>{transactionNumber}</span> $OCTIES</p>
       </div>}
 
       <div className='Menu'>

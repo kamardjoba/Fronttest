@@ -94,6 +94,15 @@ button{
 }
 .main img{height: 70%;}
 
+.mainNew{
+  width: 100%;
+  height: calc(20% - 2vh);
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+  background: #393939;
+}
+
 .MintCoin{
   height: 24%;
   width: 100%;
