@@ -34,7 +34,7 @@ import clock from '../IMG/All_Logo/clock.png';
 function Home({Galo4ka, Knopka, Galo4kaX, KnopkaX,  GalkaAnyTap, KnopkaAnyTap, KnopkaNick, 
     Ton5Succes, hasTelegramPremium, accountAgeCoins, transactionNumber,
      coins, setYearsOpen, isMint, subscriptionCoins, referralCoins, REACT_APP_BACKEND_URL,  userId, checkSubscriptionAndUpdate , setCoins,
-     AdsWatched,coinsAdd, shapka3, yoda, ksm, referralCode, Galo4kaBee, setGalo4kaBee, KnopkaBee, setKnopkaBee
+     AdsWatched,coinsAdd, shapka3, yoda, ksm, telegramLink, Galo4kaBee, setGalo4kaBee, KnopkaBee, setKnopkaBee
  }) {
 
   const TG_CHANNEL_LINK = "https://t.me/octies_community";
@@ -229,23 +229,28 @@ const showAd = async () => {
       checkSubscriptionAndUpdate(userId);
     }, 3000);
   };
+  // const TgStory = () => {
+  //   console.log("linkref", telegramLink);
+  //   const options = {
+  //     text: "Octies",
+  //     link: telegramLink, // Добавляем ссылку
+      
+  //   };
+  
+  //     window.Telegram.WebApp.shareToStory(
+  //       "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
+  //       options
+      
+  //     )
+  // };
 
-  
   const TgStory = () => {
-    const story = {
-      media_url: "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
+    const mediaUrl = "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg"; // Ваше изображение
+    const options = {
       text: "Octies",
-      widget_link: {
-        url: "https://docs.telegram-mini-apps.com/platform/methods#web-app-share-to-story",
-        name: "Octies"
-      }
+      link: telegramLink, 
     };
-  
-    window.Telegram.WebApp.shareToStory(
-      story.media_url, 
-      { text: story.text }, 
-      story.widget_link 
-    );
+      window.Telegram.WebApp.shareToStory(mediaUrl, options)  
   };
 
   const Tg_Channel_Open_X = async () => {
