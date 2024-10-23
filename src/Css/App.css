@@ -414,6 +414,7 @@ button{
   display: flex;
   flex-direction: column;
   font-size: 1.8vh;
+  overflow: visible;
 }
 
 #TaskswithoutNft{
