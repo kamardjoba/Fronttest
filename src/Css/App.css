@@ -96,11 +96,84 @@ button{
 
 .mainNew{
   width: 100%;
-  height: calc(20% - 2vh);
+  height: 25%;
   display: flex;
   align-items: center;
-  justify-content: center;  
-  background: #393939;
+  justify-content: center;
+}
+
+.mainNewBorder{
+  width: 90%;
+  height: 85%;
+  display: flex;
+  border-radius: 2vh;
+  flex-direction: column;
+  background: linear-gradient(0deg, rgba(0,0,0,1) 0%, #1A1A1A 50%, #1A1A1A 100%);
+}
+
+.mainNewInfo{
+  height: 25%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mainNewInfo img{
+  height: 60%;
+}
+.mainNewInfo p, .mainNewInfo img{
+  margin: 0 2vh 0 2vh;
+}
+
+.mainNewMenu{
+  height: 38%;
+  width: calc(100% - 4.2vh);
+  border-radius: 2vh;
+  border: 0.2vh solid #ffffff;
+  margin: 0 2vh 0 2vh;
+  background: 
+    linear-gradient( rgba(26, 26, 26, 1) 40% ,rgba(26, 26, 26, 0.3)), 
+    black url(../IMG/All_Logo/MainNewImg.png) repeat; 
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  text-align: start;
+}
+
+
+#lowNewtxt{
+  font-size: 1.5vh;
+}
+
+.mainNewMenu p{
+  margin-left: 1vh;
+  margin-right: 4vh;
+  flex-grow: 1;
+  line-height: 0.8;
+  margin-top: 0.4vh;
+}
+
+#lightGrayy{color: #BBBBBB;  width: auto; flex-grow: unset; font-size: 1.5vh;} 
+#lightGrayyy{color: #BBBBBB; font-size: 2vh;}
+.mainNewMenu img{
+  height: 70%;
+  margin-left: 4vh;
+}
+
+.mainNewfooter{
+  height: 37%;
+  width: calc(100% -4vh);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2vh 0 2vh;
+}
+
+.mainNewfooter img{
+  height: 50%;
 }
 
 .MintCoin{
@@ -140,7 +213,7 @@ button{
 }
 
 .Menu {
-  height: 68.5% ;
+  height: 67.5% ;
   width: 100%;
   display: flex;
   align-items: center;

@@ -24,10 +24,10 @@ import Watch from '../IMG/All_Logo/watch.png';
 import racketaMain from '../IMG/All_Logo/karandash_in_hand.png';
 //import image Main
 import Ellipse from '../IMG/All_Logo/Ellipse.png';
+import View from '../IMG/All_Logo/View.png';
 // import Logo from '../IMG/All_Logo/Logo.png';
 // import Play from '../IMG/All_Logo/Play.png';
-import Octo from '../IMG/All_Logo/Octo.png';
-import NFTm from '../IMG/All_Logo/NFTmint.png';
+import Octo from '../IMG/All_Logo/Octo.svg';
 // import beeVerse from '../IMG/All_Logo/BeeVerse.png';
 import clock from '../IMG/All_Logo/clock.png';
 
@@ -378,8 +378,22 @@ useEffect(() => {
        */}
 
       {<div className="mainNew">
-          {coins === 0 ? <p>Loading...</p> : <p>{coins.toLocaleString('en-US')} $OCTIES</p>}
-          <p id='endtxt'> {coins === 0 ? <p>Loading...</p> : <p>{coins.toLocaleString('en-US')}</p>} <span id='highlight'>{transactionNumber}</span> $OCTIES</p>
+        <div className="mainNewBorder">
+          <div className="mainNewInfo">
+            <p>EARNED POINTS</p>
+            <img src={Octo} alt="" />
+          </div>
+          <div className="mainNewMenu">
+           
+            <img src={Octo} alt="" /><p>{coins.toLocaleString('en-US')}<br/><span id='lowNewtxt'> $OCTIES </span></p>
+            <p id='lightGrayy'>from OCTIES</p>
+            {/* <p id='endtxt'> {coins === 0 ? <p>Loading...</p> : <p>{coins.toLocaleString('en-US')}</p>} <span id='highlight'>{transactionNumber}</span> $OCTIES</p> */}
+          </div>
+          <div className="mainNewfooter">
+            <img src={View} alt="" />
+            <p id='lightGrayyy'>? LEARN MORE</p>
+          </div>
+        </div>  
       </div>}
 
       <div className='Menu'>
