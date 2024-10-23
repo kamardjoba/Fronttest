@@ -411,7 +411,7 @@ const handleExpand = () => {
             <div className="mainNewMenu">
               <img src={OrgOcto} alt="" />
               <p>
-                {coins.toLocaleString('en-US')}
+                {transactionNumber.toLocaleString('en-US')}
                 <br />
                 <span id="lowNewtxt"> $OCTIES </span>
               </p>
@@ -421,7 +421,7 @@ const handleExpand = () => {
             <div className="mainNewMenu">
               <img src={CoinOcto} alt="" />
               <p>
-                {coins.toLocaleString('en-US')}
+                0
                 <br />
                 <span id="lowNewtxt"> $OCTIES </span>
               </p>
