@@ -342,7 +342,14 @@ useEffect(() => {
 
   return () => clearInterval(timerId);
 }, []);
+
 //_______________________________________________________________________________________
+
+const [isExpanded, setIsExpanded] = useState(false); // Состояние для управления расширением
+
+const handleExpand = () => {
+  setIsExpanded(!isExpanded); // Переключаем состояние при нажатии
+};
 
     return (
         <div className="mainHome">
@@ -377,24 +384,54 @@ useEffect(() => {
 
        */}
 
-      {<div className="mainNew">
-        <div className="mainNewBorder">
-          <div className="mainNewInfo">
-            <p>EARNED POINTS</p>
-            <img src={Octo} alt="" />
-          </div>
-          <div className="mainNewMenu">
-           
-            <img src={Octo} alt="" /><p>{coins.toLocaleString('en-US')}<br/><span id='lowNewtxt'> $OCTIES </span></p>
-            <p id='lightGrayy'>from OCTIES</p>
-            {/* <p id='endtxt'> {coins === 0 ? <p>Loading...</p> : <p>{coins.toLocaleString('en-US')}</p>} <span id='highlight'>{transactionNumber}</span> $OCTIES</p> */}
-          </div>
-          <div className="mainNewfooter">
-            <img src={View} alt="" />
-            <p id='lightGrayyy'>? LEARN MORE</p>
-          </div>
-        </div>  
-      </div>}
+<div className={isExpanded ? `mainNew2` : 'mainNew'}>
+      <div className="mainNewBorder">
+        <div className="mainNewInfo">
+          <p>EARNED POINTS</p>
+          <img src={Octo} alt="" />
+        </div>
+        <div className="mainNewMenuBorder">
+        <div className="mainNewMenu">
+          <img src={Octo} alt="" />
+          <p>
+            {coins.toLocaleString('en-US')}
+            <br />
+            <span id="lowNewtxt"> $OCTIES </span>
+          </p>
+          <p id="lightGrayy">from OCTIES</p>
+        </div>
+
+        {isExpanded && (
+          <>
+          
+            <div className="mainNewMenu">
+              <img src={Octo} alt="" />
+              <p>
+                {coins.toLocaleString('en-US')}
+                <br />
+                <span id="lowNewtxt"> $OCTIES </span>
+              </p>
+              <p id="lightGrayy">from OCTIES</p>
+            </div>
+
+            <div className="mainNewMenu">
+              <img src={Octo} alt="" />
+              <p>
+                {coins.toLocaleString('en-US')}
+                <br />
+                <span id="lowNewtxt"> $OCTIES </span>
+              </p>
+              <p id="lightGrayy">from OCTIES</p>
+            </div>
+          </>
+        )}
+        </div>
+        <div className="mainNewfooter" onClick={handleExpand} style={{ cursor: 'pointer' }}>
+          <img src={View} alt="" />
+          <p id="lightGrayyy">? LEARN MORE</p>
+        </div>
+      </div>
+    </div>
 
       <div className='Menu'>
 
@@ -528,7 +565,7 @@ useEffect(() => {
           </div>
           <p>Your Rewards</p>
         </div>
-        <div className='Tasks'>
+        <div className="Tasks">
           
         {adsCompletionCount > 0 && (<div className='TS'>
             <div className='tsPhoto'>

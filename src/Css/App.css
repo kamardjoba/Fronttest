@@ -94,17 +94,20 @@ button{
 }
 .main img{height: 70%;}
 
-.mainNew{
+.mainNew, .mainNew2{
   width: 100%;
-  height: 25%;
+  height: 22%;
   display: flex;
-  align-items: center;
+  margin-top: 2vh;
   justify-content: center;
+}
+
+.mainNew2{
+  height: 41%;
 }
 
 .mainNewBorder{
   width: 90%;
-  height: 85%;
   display: flex;
   border-radius: 2vh;
   flex-direction: column;
@@ -112,7 +115,7 @@ button{
 }
 
 .mainNewInfo{
-  height: 25%;
+  height: 5vh;
   width: 100%;
   display: flex;
   align-items: center;
@@ -126,14 +129,16 @@ button{
   margin: 0 2vh 0 2vh;
 }
 
+
+
 .mainNewMenu{
-  height: 38%;
+  height: 7vh;
   width: calc(100% - 4.2vh);
   border-radius: 2vh;
   border: 0.2vh solid #ffffff;
-  margin: 0 2vh 0 2vh;
+  margin: 0 2vh 1.5vh 2vh;
   background: 
-    linear-gradient( rgba(26, 26, 26, 1) 40% ,rgba(26, 26, 26, 0.3)), 
+    linear-gradient( rgba(26, 26, 26, 1) 40% ,rgba(26, 26, 26, 0.2)), 
     black url(../IMG/All_Logo/MainNewImg.png) repeat; 
   background-size: cover;
   display: flex;
@@ -164,7 +169,7 @@ button{
 }
 
 .mainNewfooter{
-  height: 37%;
+  height: 4vh;
   width: calc(100% -4vh);
   display: flex;
   align-items: center;
@@ -173,7 +178,7 @@ button{
 }
 
 .mainNewfooter img{
-  height: 50%;
+  height: 80%;
 }
 
 .MintCoin{
@@ -404,7 +409,7 @@ button{
 .MenuBtn img {height:4vh;margin-left: 1.7vh;}
 
 .Tasks{
-  height: 41%;
+  height: 1%;
   width: 90%;
   display: flex;
   flex-direction: column;
