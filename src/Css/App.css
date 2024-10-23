@@ -217,7 +217,8 @@ button{
   font-size: 4vh;
 }
 
-.Menu {
+
+.Menu, .Menu2  {
   height: 67.5% ;
   width: 100%;
   display: flex;
@@ -225,6 +226,11 @@ button{
   flex-direction: column;
   overflow-y: auto;
 }
+
+.Menu2 {
+  height: 50% ;
+}
+
 
 .Reward {
   height: 8%;
@@ -252,7 +258,7 @@ button{
 
 .Skroll_Menu_Border{
   width: 100%;
-  height: 26%;
+  height: 15vh;
   overflow-y: hidden;
   white-space: nowrap;
   overflow-x: scroll;
@@ -409,7 +415,6 @@ button{
 .MenuBtn img {height:4vh;margin-left: 1.7vh;}
 
 .Tasks{
-  height: 20%;
   width: 90%;
   display: flex;
   flex-direction: column;
@@ -737,11 +742,11 @@ button[data-tc-dropdown-button="true"] {
 }
 
 .AdsGramBorder{
-  height: calc(25% - 0.5vh - 0.2vh);
+  height: 14vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 90%;
+  width: calc(90% - 0.2vh);
   background: #1A1A1A;
   border-radius: 2vh;
   margin-bottom: 0.5vh;

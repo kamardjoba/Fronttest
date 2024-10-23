@@ -433,7 +433,7 @@ const handleExpand = () => {
       </div>
     </div>
 
-      <div className='Menu'>
+      <div className={isExpanded ? `Menu2` : 'Menu'}>
 
         <div className='AdsGramBorder'>
         
