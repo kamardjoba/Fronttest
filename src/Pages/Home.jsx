@@ -28,6 +28,9 @@ import View from '../IMG/All_Logo/View.png';
 // import Logo from '../IMG/All_Logo/Logo.png';
 // import Play from '../IMG/All_Logo/Play.png';
 import Octo from '../IMG/All_Logo/Octo.svg';
+import OrgOcto from '../IMG/All_Logo/Org_Octo.svg';
+import CoinOcto from '../IMG/All_Logo/Coin_Octo.png';
+import Collapse from '../IMG/All_Logo/Collapse.png';
 // import beeVerse from '../IMG/All_Logo/BeeVerse.png';
 import clock from '../IMG/All_Logo/clock.png';
 
@@ -406,29 +409,29 @@ const handleExpand = () => {
           <>
           
             <div className="mainNewMenu">
-              <img src={Octo} alt="" />
+              <img src={OrgOcto} alt="" />
               <p>
                 {coins.toLocaleString('en-US')}
                 <br />
                 <span id="lowNewtxt"> $OCTIES </span>
               </p>
-              <p id="lightGrayy">from OCTIES</p>
+              <p id='highlightt'>from OCTIES</p>
             </div>
 
             <div className="mainNewMenu">
-              <img src={Octo} alt="" />
+              <img src={CoinOcto} alt="" />
               <p>
                 {coins.toLocaleString('en-US')}
                 <br />
                 <span id="lowNewtxt"> $OCTIES </span>
               </p>
-              <p id="lightGrayy">from OCTIES</p>
+              <p id="highyellow">from OCTIES</p>
             </div>
           </>
         )}
         </div>
         <div className="mainNewfooter" onClick={handleExpand} style={{ cursor: 'pointer' }}>
-          <img src={View} alt="" />
+          <img src={isExpanded ? Collapse : View}  alt="" />
           <p id="lightGrayyy">? LEARN MORE</p>
         </div>
       </div>
