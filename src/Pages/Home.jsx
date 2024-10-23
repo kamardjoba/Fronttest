@@ -348,7 +348,8 @@ useEffect(() => {
 const [isExpanded, setIsExpanded] = useState(false); // Состояние для управления расширением
 
 const handleExpand = () => {
-  setIsExpanded(!isExpanded); // Переключаем состояние при нажатии
+  setIsExpanded(!isExpanded); 
+  window.Telegram.WebApp.HapticFeedback.impactOccurred('heavy');
 };
 
     return (
