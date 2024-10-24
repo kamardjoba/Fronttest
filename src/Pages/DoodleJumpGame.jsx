@@ -1,24 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
-const DoodleJumpGame = () => {
-  const [userId, setUserId] = useState(null);
-
-  useEffect(() => {
-    // Получаем userId из параметров URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const userIdFromTelegram = urlParams.get('userId');
-    setUserId(userIdFromTelegram);
-  }, []);
-
+const DoodleJumpGame = ({ userId }) => {
+  // Формируем URL игры с параметром userId
   const gameUrl = userId 
     ? `https://gameocties.netlify.app?userId=${userId}` 
     : "https://gameocties.netlify.app";
 
   return (
-    <div style={{ display: "flex", flex: 1 }}>
+    <div style={{ display: "flex", flex: 1, height: '100vh' }}>
       {userId ? (
         <iframe 
-          style={{ flex: 1, border: "none", height: '90%' }} 
+          style={{ flex: 1, border: "none", height: '100%' }} 
           src={gameUrl} 
           title="Game" 
         />
