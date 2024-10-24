@@ -1,37 +1,32 @@
-// import React from 'react';
-// import '../Css/P2e.css';
-
-// const PlayToEarn = () => {
-
-//     return (
-//         <div className='P2E_Window'>
-//             <iframe 
-//                 src="https://octiesdev.github.io/test_game_v8/" 
-//                 width="100%" 
-//                 height="100%" 
-//                 style={{ border: 'none' }}
-//             />
-//         </div>
-//     );
-// }
-
-// export default PlayToEarn;
-
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 
 const DoodleJumpGame = () => {
-  const { userId } = useParams(); // Извлекаем userId из параметров маршрута
+  const [userId, setUserId] = useState(null);
 
-  const gameUrl = `https://gameocties.netlify.app?userId=${userId}`;
+  useEffect(() => {
+    // Получаем userId из параметров URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const userIdFromTelegram = urlParams.get('userId');
+    setUserId(userIdFromTelegram);
+  }, []);
+
+  const gameUrl = userId 
+    ? `https://gameocties.netlify.app?userId=${userId}` 
+    : "https://gameocties.netlify.app";
 
   return (
     <div style={{ display: "flex", flex: 1 }}>
-      <iframe style={{ flex: 1, border: "none", height: '90%' }} src={gameUrl} title="Game" />
+      {userId ? (
+        <iframe 
+          style={{ flex: 1, border: "none", height: '90%' }} 
+          src={gameUrl} 
+          title="Game" 
+        />
+      ) : (
+        <p>Загрузка игры...</p>
+      )}
     </div>
   );
 };
 
 export default DoodleJumpGame;
-
-
