@@ -17,30 +17,32 @@
 
 // export default PlayToEarn;
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const DoodleJumpGame = () => {
   const [userId, setUserId] = useState(null);
 
   useEffect(() => {
-    // Получаем userId из параметров или контекста приложения
+    // Получаем userId из параметров URL
     const urlParams = new URLSearchParams(window.location.search);
     const userIdFromTelegram = urlParams.get('userId');
     setUserId(userIdFromTelegram);
   }, []);
 
-  const gameUrl = `https://octiesdev.github.io?userId=${userId}`;
+  // Формируем URL для игры с переданным userId
+  const gameUrl = userId ? `https://gameocties.netlify.app?userId=${userId}` : 'https://gameocties.netlify.app';
 
   return (
-    <div style={{display: "flex", flex: 1}}>
-      {/* {userId ? (
-        <iframe src={gameUrl} width="800" height="600" title="Game" />
+    <div style={{ display: "flex", flex: 1 }}>
+      {userId ? (
+        // Передаём userId в iframe через URL
+        <iframe style={{ flex: 1, border: "none", height: '90%' }} src={gameUrl} title="Game" />
       ) : (
         <p>Loading game...</p>
-      )} */}
-      <iframe style={{flex: 1, border: "none", height: '90%'}} src="https://gameocties.netlify.app" title="Game"/>
+      )}
     </div>
   );
 };
 
 export default DoodleJumpGame;
+

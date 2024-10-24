@@ -563,7 +563,7 @@ const handleCheckReferrals = () => {
 
         <Route path="/leaderboard" element={<Leaderboard userId={userId} coins={coins} getRandomColor={getRandomColor}/>} />
 
-        <Route path="/playtoearn" element={<DoodleJumpGame/>} />
+        <Route path="/playtoearn" element={<DoodleJumpGame userId={userId}/>} />
 
         <Route path="/friends" element={<Friends invite={invite} referralCode={referralCode} telegramLink={telegramLink} getRandomColor={getRandomColor}/>} />
 
