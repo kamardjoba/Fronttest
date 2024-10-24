@@ -19,7 +19,7 @@ import LoadingScreen from '../Loading/Loading.jsx';
 import LoadingScreenOcto from '../Loading/LoadingOcto.jsx';
 import LoadingScreenOctoNft from '../Loading/LoadingOctoNft.jsx'
 import DoodleJumpGame from '../Pages/DoodleJumpGame.jsx'
-import DoodleJumpGame from '../Pages/DoodleJumpGame.jsx';
+
 
 //import image Friends
 import invite from '../IMG/All_Logo/Invite_png.png';
