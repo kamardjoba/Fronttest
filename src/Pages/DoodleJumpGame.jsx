@@ -17,32 +17,21 @@
 
 // export default PlayToEarn;
 
-import { useEffect, useState } from 'react';
+import React from 'react';
+import { useParams } from 'react-router-dom';
 
 const DoodleJumpGame = () => {
-  const [userId, setUserId] = useState(null);
+  const { userId } = useParams(); // Извлекаем userId из параметров маршрута
 
-  useEffect(() => {
-    // Получаем userId из параметров URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const userIdFromTelegram = urlParams.get('userId');
-    setUserId(userIdFromTelegram);
-  }, []);
-
-  // Формируем URL для игры с переданным userId
-  const gameUrl = userId ? `https://gameocties.netlify.app?userId=${userId}` : 'https://gameocties.netlify.app';
+  const gameUrl = `https://gameocties.netlify.app?userId=${userId}`;
 
   return (
     <div style={{ display: "flex", flex: 1 }}>
-      {userId ? (
-        // Передаём userId в iframe через URL
-        <iframe style={{ flex: 1, border: "none", height: '90%' }} src={gameUrl} title="Game" />
-      ) : (
-        <p>Loading game...</p>
-      )}
+      <iframe style={{ flex: 1, border: "none", height: '90%' }} src={gameUrl} title="Game" />
     </div>
   );
 };
 
 export default DoodleJumpGame;
+
 

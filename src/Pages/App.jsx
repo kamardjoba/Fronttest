@@ -19,6 +19,7 @@ import LoadingScreen from '../Loading/Loading.jsx';
 import LoadingScreenOcto from '../Loading/LoadingOcto.jsx';
 import LoadingScreenOctoNft from '../Loading/LoadingOctoNft.jsx'
 import DoodleJumpGame from '../Pages/DoodleJumpGame.jsx'
+import DoodleJumpGame from '../Pages/DoodleJumpGame.jsx';
 
 //import image Friends
 import invite from '../IMG/All_Logo/Invite_png.png';
@@ -566,6 +567,10 @@ const handleCheckReferrals = () => {
         <Route path="/playtoearn" element={<DoodleJumpGame userId={userId}/>} />
 
         <Route path="/friends" element={<Friends invite={invite} referralCode={referralCode} telegramLink={telegramLink} getRandomColor={getRandomColor}/>} />
+
+        <Route path="/game/:userId">
+          <DoodleJumpGame />
+        </Route>
 
         <Route path="/nfts" element={<NFTs showNotCompleted={showNotCompleted} Nft={Nft} handleCheckReferrals={handleCheckReferrals} buttonVisible={buttonVisible}
                               Checknft={Checknft} shapka2={shapka2} dedpool={dedpool} ChecknftDone={ChecknftDone} setTransactionNumber={setTransactionNumber} userId={userId}
