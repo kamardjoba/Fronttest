@@ -1,14 +1,9 @@
 *{
   user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-a {
-  -webkit-tap-highlight-color: rgba(0,0,0,0); 
-}
 
-Link{
-  -webkit-tap-highlight-color: rgba(0,0,0,0); 
-}
 
 ::-webkit-scrollbar {
   display: none;
@@ -94,6 +89,96 @@ button{
 }
 .main img{height: 70%;}
 
+.mainNew, .mainNew2{
+  width: 100%;
+  height: 22%;
+  display: flex;
+  margin-top: 2vh;
+  justify-content: center;
+}
+
+.mainNew2{
+  height: 41%;
+}
+
+.mainNewBorder{
+  width: 90%;
+  display: flex;
+  border-radius: 2vh;
+  flex-direction: column;
+  background: linear-gradient(0deg, rgba(0,0,0,1) 0%, #1A1A1A 50%, #1A1A1A 100%);
+}
+
+.mainNewInfo{
+  height: 5vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mainNewInfo img{
+  height: 60%;
+}
+.mainNewInfo p, .mainNewInfo img{
+  margin: 0 2vh 0 2vh;
+}
+
+
+
+.mainNewMenu{
+  height: 7vh;
+  width: calc(100% - 4.2vh);
+  border-radius: 2vh;
+  border: 0.2vh solid #ffffff;
+  margin: 0 2vh 1.5vh 2vh;
+  background: 
+    linear-gradient( rgba(26, 26, 26, 1) 40% ,rgba(26, 26, 26, 0.2)), 
+    black url(../IMG/All_Logo/MainNewImg.png) repeat; 
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  text-align: start;
+}
+
+
+#lowNewtxt{
+  font-size: 1.5vh;
+}
+
+.mainNewMenu p{
+  margin-left: 1vh;
+  margin-right: 4vh;
+  flex-grow: 1;
+  line-height: 0.8;
+  margin-top: 0.4vh;
+}
+
+#lightGrayy{color: #BBBBBB;  width: auto; flex-grow: unset; font-size: 1.5vh;} 
+#highlightt {color: #D06C24; width: auto; flex-grow: unset; font-size: 1.5vh; }
+#highyellow {color: #FFF731; width: auto; flex-grow: unset; font-size: 1.5vh; }
+#lightGrayyy{color: #BBBBBB; font-size: 2vh;}
+.mainNewMenu img{
+  height: 70%;
+  margin-left: 4vh;
+}
+
+.mainNewfooter{
+  height: 4vh;
+  width: calc(100% -4vh);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2vh 0 2vh;
+}
+
+.mainNewfooter img{
+  height: 80%;
+  outline: none;
+}
+
 .MintCoin{
   height: 24%;
   width: 100%;
@@ -130,14 +215,20 @@ button{
   font-size: 4vh;
 }
 
-.Menu {
-  height: 68.5% ;
+
+.Menu, .Menu2  {
+  height: 67.5% ;
   width: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
-  overflow-y: auto;
+  overflow-y: scroll;
 }
+
+.Menu2 {
+  height: 50% ;
+}
+
 
 .Reward {
   height: 8%;
@@ -165,7 +256,7 @@ button{
 
 .Skroll_Menu_Border{
   width: 100%;
-  height: 26%;
+  height: 15vh;
   overflow-y: hidden;
   white-space: nowrap;
   overflow-x: scroll;
@@ -322,11 +413,12 @@ button{
 .MenuBtn img {height:4vh;margin-left: 1.7vh;}
 
 .Tasks{
-  height: 41%;
+  height: 1%;
   width: 90%;
   display: flex;
   flex-direction: column;
   font-size: 1.8vh;
+  overflow: visible;
 }
 
 #TaskswithoutNft{
@@ -649,11 +741,11 @@ button[data-tc-dropdown-button="true"] {
 }
 
 .AdsGramBorder{
-  height: calc(25% - 0.5vh - 0.2vh);
+  height: 14vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 90%;
+  width: calc(90% - 0.2vh);
   background: #1A1A1A;
   border-radius: 2vh;
   margin-bottom: 0.5vh;

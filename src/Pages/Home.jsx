@@ -24,10 +24,13 @@ import Watch from '../IMG/All_Logo/watch.png';
 import racketaMain from '../IMG/All_Logo/karandash_in_hand.png';
 //import image Main
 import Ellipse from '../IMG/All_Logo/Ellipse.png';
+import View from '../IMG/All_Logo/View.png';
 // import Logo from '../IMG/All_Logo/Logo.png';
 // import Play from '../IMG/All_Logo/Play.png';
-import Octo from '../IMG/All_Logo/Octo.png';
-import NFTm from '../IMG/All_Logo/NFTmint.png';
+import Octo from '../IMG/All_Logo/Octo.svg';
+import OrgOcto from '../IMG/All_Logo/Org_Octo.svg';
+import CoinOcto from '../IMG/All_Logo/Coin_Octo.png';
+import Collapse from '../IMG/All_Logo/Collapse.png';
 // import beeVerse from '../IMG/All_Logo/BeeVerse.png';
 import clock from '../IMG/All_Logo/clock.png';
 
@@ -245,29 +248,13 @@ const showAd = async () => {
   // };
 
   const TgStory = () => {
- 
-    
-  
     const mediaUrl = "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg"; // Ваше изображение
-  
     const options = {
       text: "Octies",
       link: telegramLink, 
     };
-  
-
-      window.Telegram.WebApp.shareToStory(mediaUrl, options)
-        
+      window.Telegram.WebApp.shareToStory(mediaUrl, options)  
   };
-  // const Tg_Channel_Support = () => {
-  //   const userId = new URLSearchParams(window.location.search).get('userId');
-  //   window.Telegram.WebApp.HapticFeedback.impactOccurred('heavy');
-  //   window.open(Support, '_blank');
-  //   setTimeout(() => {
-  //     checkSubscriptionAndUpdate(userId);
-  //   }, 3000);
-  // };
-  
 
   const Tg_Channel_Open_X = async () => {
     window.Telegram.WebApp.HapticFeedback.impactOccurred('heavy');
@@ -294,53 +281,6 @@ const showAd = async () => {
       }
     }, 5000);
   };
-
-
-
-  // const Open_Ads = async () => {
-  //   setads(false);
-  //   window.Telegram.WebApp.HapticFeedback.impactOccurred('heavy');
-   
-  //   setTimeout(async () => {
-  //     setads(true);
-  //   }, 5000);
-  // };
-
-  
-  // const Tg_Bot_Bee = async () => {
-  //   window.Telegram.WebApp.HapticFeedback.impactOccurred('heavy');
-  //   console.log('Отправляемый userId:', userId);  
-  //   window.open(bot_part, '_blank');
-  //   setTimeout(async () => {
-  //     if (localStorage.getItem('KnopkaBee') === 'true') {
-  //       localStorage.setItem('KnopkaBee', 'false');
-  //       localStorage.setItem('Galo4kaBee', 'true');
-  //       setGalo4kaBee(true);
-  //       setKnopkaBee(false);
-  //       try {
-  //         const response = await axios.post(`${REACT_APP_BACKEND_URL}/update-coins-bot`, { userId: userId, amount: 750 });
-  //         if (response.data.success) {
-  //           setCoins(response.data.coins);
-  //           if (response.data.hasBotSub) {
-  //             localStorage.setItem('hasBotSub', 'true');
-  //             setCoins(response.data.coins);
-  //             console.log('Отправляемый userId:успех');  
-  //           }
-  //         } else {
-  //           console.error('Ошибка при обновлении монет:', response.data.message);
-  //         }
-  //       } catch (error) {
-  //         console.error('Ошибка при обновлении монет:', error);
-  //       }
-  //     }
-  //   }, 5000);};
-  // window.Telegram.WebApp.HapticFeedback.impactOccurred('heavy');
-  // setTimeout(async () => {
-    
-  //     setGalo4kaBee(true);
-  //     setKnopkaBee(false);
-    
-  // }, 5000);
 
 //_______________________________________________________________Task_Swap
 const blockRefs = [useRef(null), useRef(null), useRef(null), useRef(null)];
@@ -405,7 +345,15 @@ useEffect(() => {
 
   return () => clearInterval(timerId);
 }, []);
+
 //_______________________________________________________________________________________
+
+const [isExpanded, setIsExpanded] = useState(false); // Состояние для управления расширением
+
+const handleExpand = () => {
+  setIsExpanded(!isExpanded); 
+  window.Telegram.WebApp.HapticFeedback.impactOccurred('heavy');
+};
 
     return (
         <div className="mainHome">
@@ -425,7 +373,7 @@ useEffect(() => {
         <img src={shapka3} id="shapka2" alt=''/>
       </div>
       </div>
-      {!isMint && <div className="main">
+      {/* {!isMint && <div className="main">
         <img src={Octo} alt='Octo' onClick={(event) => {localStorage.clear()}}/>
       </div>}
       {!isMint &&<div className='MainCoin'>
@@ -438,7 +386,58 @@ useEffect(() => {
         <p id='endtxt'> {coins === 0 ? <p>Loading...</p> : <p>{coins.toLocaleString('en-US')}</p>} <span id='highlight'>{transactionNumber}</span> $OCTIES</p>
       </div>}
 
-      <div className='Menu'>
+       */}
+
+<div className={isExpanded ? `mainNew2` : 'mainNew'}>
+      <div className="mainNewBorder">
+        <div className="mainNewInfo">
+          <p>EARNED POINTS</p>
+          <img src={Octo} alt="" />
+        </div>
+        <div className="mainNewMenuBorder">
+        <div className="mainNewMenu">
+          <img src={Octo} alt="" />
+          <p>
+            {coins.toLocaleString('en-US')}
+            <br />
+            <span id="lowNewtxt"> $OCTIES </span>
+          </p>
+          <p id="lightGrayy">from OCTIES</p>
+        </div>
+
+        {isExpanded && (
+          <>
+          
+            <div className="mainNewMenu">
+              <img src={OrgOcto} alt="" />
+              <p>
+                {transactionNumber.toLocaleString('en-US')}
+                <br />
+                <span id="lowNewtxt"> $OCTIES </span>
+              </p>
+              <p id='highlightt'>from OCTIES</p>
+            </div>
+
+            <div className="mainNewMenu">
+              <img src={CoinOcto} alt="" />
+              <p>
+                0
+                <br />
+                <span id="lowNewtxt"> $OCTIES </span>
+              </p>
+              <p id="highyellow">from OCTIES</p>
+            </div>
+          </>
+        )}
+        </div>
+        <div className="mainNewfooter" onClick={handleExpand} style={{ cursor: 'pointer' }}>
+          <img src={isExpanded ? Collapse : View}  alt="" />
+          <p id="lightGrayyy">? LEARN MORE</p>
+        </div>
+      </div>
+    </div>
+
+      <div className={isExpanded ? `Menu2` : 'Menu'}>
 
         <div className='AdsGramBorder'>
         
@@ -535,47 +534,6 @@ useEffect(() => {
               </div>
             </div>
           </div>
-          
-          {/* <div className='MenuBorder' ref={blockRefs[3]}>
-            <div className='flex_menu_border'  id='orangeBack'>
-              <div className='rightFlex'>
-                <div id='up'>
-                  <p >BeeVerse</p>
-                </div>
-                <div id='dp'>
-                  <p>Defeat boss, earn real money rewards</p>
-                </div>
-                <div className='MenuBtn'>
-                  {KnopkaBee && <img onClick={Tg_Bot_Bee} src={Join} alt='Join' />}
-                  <p> {KnopkaBee && <p id="plus">+</p>}750 $OCTIES</p>
-                  {Galo4kaBee && <img id="galo4ka" src={galo4ka} alt='' />}
-                </div>
-              </div>
-              <div className='leftFlex'>
-                <img src={beeVerse} alt=''/>
-              </div>
-            </div>
-          </div>
-
-          <div className='MenuBorder' ref={blockRefs[4]}>
-            <div className='flex_menu_border' id='greenBack'>
-              <div className='rightFlex'>
-                <div  id='up'>
-                  <p>Available Partner Space</p>
-                </div>
-                <div  id='dp'>
-                  <p>Your proposition</p>
-                </div> 
-                <div className='MenuBtn'>
-                  <img onClick={Tg_Channel_Support} src={ContactUs} alt='ContactUs' />
-                  <p>+??? $OCTIES</p>
-                </div>
-              </div>
-              <div className='leftFlex'>
-                <img src={FreePosition} alt=''/>
-              </div>
-            </div>
-          </div> */}
 
           <div className='MenuBorder' ref={blockRefs[3]}>
             <div className='flex_menu_border'>
@@ -611,7 +569,7 @@ useEffect(() => {
           </div>
           <p>Your Rewards</p>
         </div>
-        <div className='Tasks'>
+        <div className="Tasks">
           
         {adsCompletionCount > 0 && (<div className='TS'>
             <div className='tsPhoto'>
